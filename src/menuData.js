@@ -2,6 +2,7 @@ const menuData = [
     {
         category: 'Pizzas',
         description: 'Crust, sauce, and toppings.  So simple, yet so many tasty combinations.',
+        imageUrl: 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         items: [
             {
                 name: 'Create Your Own',
@@ -169,6 +170,7 @@ const menuData = [
     {
         category: 'Appetizers',
         description: 'A delicious way to start your meal.',
+        imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
         items: [
             {
                 name: 'Mozzerella Sticks',

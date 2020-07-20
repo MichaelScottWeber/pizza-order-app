@@ -1,0 +1,13 @@
+.MenuCategoryList-item {
+    display: flex;
+    border: 1px solid black;
+}
+
+.MenuCategoryList-item:hover {
+    cursor: pointer;
+}
+
+.MenuCategoryList-item img {
+    width: 100px;
+    height: auto;
+}
