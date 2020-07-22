@@ -1,6 +1,12 @@
+.MenuCategoryList {
+    margin: 10px;
+    padding: 0;
+}
+
 .MenuCategoryList-item {
     display: flex;
     border: 1px solid black;
+    margin: 10px;
 }
 
 .MenuCategoryList-item:hover {

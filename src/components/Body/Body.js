@@ -12,6 +12,15 @@ class Body extends Component {
     state = {  
         view: 'MenuCategoryList',
         category: null,
+        currentItem: null,
+        cart: []
+    }
+
+    itemSelect = (item) => {
+        this.setState({
+            view: 'MenuItemDetail',
+            currentItem: item
+        })
     }
 
     categorySelect = (cat) => {
@@ -47,7 +56,7 @@ class Body extends Component {
                         <Button text="Cart" />
                         <Button text="Back" buttonClick={this.backToCategoryList} />
                     </div>
-                    <MenuItemList category={this.state.category} />
+                    <MenuItemList category={this.state.category} itemSelect={this.itemSelect} />
                 </div>
             )
         }
@@ -58,7 +67,7 @@ class Body extends Component {
                         <Button text="Cart" />
                         <Button text="Back" buttonClick={this.backToMenuItemList} />
                     </div>
-                    <MenuItemDetail />
+                    <MenuItemDetail currentItem={this.state.currentItem} />
                 </div>
             )
         }

@@ -4,9 +4,7 @@ import './MenuCategoryList.css';
 
 class MenuCategoryList extends Component {
 
-    handleClick = (e) => {
-        this.props.categorySelect(e);
-    }
+    handleClick = (e) => this.props.categorySelect(e);
 
     categoryList = menuData.map(cat => {
         return (
