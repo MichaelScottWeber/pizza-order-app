@@ -10,7 +10,7 @@ class MenuCategoryList extends Component {
         return (
             <li 
                 className="MenuCategoryList-item" 
-                key={cat.category}
+                key={cat.id}
                 onClick={() => (
                     this.handleClick(cat)
                 )}

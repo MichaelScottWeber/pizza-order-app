@@ -16,13 +16,6 @@ class Body extends Component {
         cart: []
     }
 
-    itemSelect = (item) => {
-        this.setState({
-            view: 'MenuItemDetail',
-            currentItem: item
-        })
-    }
-
     categorySelect = (cat) => {
         this.setState({ 
             view: 'MenuItemList',
@@ -30,12 +23,29 @@ class Body extends Component {
         });
     }
 
-    backToCategoryList = (e) => {
-        this.setState({ view: 'MenuCategoryList' });
+    itemSelect = (item) => {
+        this.setState({
+            view: 'MenuItemDetail',
+            currentItem: item
+        })
     }
 
-    backToMenuItemList = (e) => {
-        this.setState({ view: 'MenuItemList' });
+    backToCategoryList = (e) => this.setState({ view: 'MenuCategoryList' });
+
+    backToMenuItemList = (e) => this.setState({ view: 'MenuItemList' });
+
+    quantityIncrease = (e) => {
+        let currentItem = this.state.currentItem;
+        currentItem.quantity++;
+        this.setState({ currentItem: currentItem })
+    }
+
+    quantityDecrease = (e) => {
+        let currentItem = this.state.currentItem;
+        if (currentItem.quantity > 1) {
+            currentItem.quantity--;
+            this.setState({ currentItem: currentItem })
+        }
     }
     
     render() { 
@@ -67,7 +77,12 @@ class Body extends Component {
                         <Button text="Cart" />
                         <Button text="Back" buttonClick={this.backToMenuItemList} />
                     </div>
-                    <MenuItemDetail currentItem={this.state.currentItem} />
+                    <MenuItemDetail 
+                        category={this.state.category}
+                        currentItem={this.state.currentItem} 
+                        quantityIncrease={this.quantityIncrease}
+                        quantityDecrease={this.quantityDecrease}
+                    />
                 </div>
             )
         }

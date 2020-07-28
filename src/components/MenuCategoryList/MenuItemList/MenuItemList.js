@@ -4,10 +4,18 @@ import './MenuItemList.css';
 class MenuItemList extends Component {
 
     displayPrice = (item) => {
-        if (item.price.L) {
-            return item.price.L;
+        if (!item.availableSizes) {
+            return <span>${item.price}</span>
         } else {
-            return item.price;
+            let listPrices = item.availableSizes.map((size, index) => {
+                return (
+                    <span key={item+index}>
+                        ${size.price}
+                        {item.availableSizes[index + 1] ? ' / ' : ''}
+                    </span>
+                )
+            })
+            return listPrices;
         }
     };
 
@@ -17,7 +25,7 @@ class MenuItemList extends Component {
         return (
             <li
                 className="MenuItemList-item"
-                key={item.name}
+                key={item.id}
                 onClick={() => (
                     this.handleClick(item)
                 )}
@@ -25,7 +33,7 @@ class MenuItemList extends Component {
                 <img src={item.imageUrl} alt={item.name} />
                 <h3>{item.name}</h3>
                 <p>
-                    {item.size} ${this.displayPrice(item)}
+                    {this.displayPrice(item)}
                 </p>
             </li>
         )
