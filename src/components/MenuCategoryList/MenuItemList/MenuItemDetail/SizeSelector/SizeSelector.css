@@ -8,9 +8,29 @@
     text-decoration: none;
     cursor: pointer;
     margin: 1rem;
-    padding: 2rem;
-    color: white;
-    border: 2px solid black;
-    border-radius: 50px;
+    /* padding: 2rem; */
+    /* color: white; */
+    /* border: 2px solid black; */
+    /* border-radius: 50px; */
     background-color: white;
+}
+
+.SizeSelector .selected {
+    background-color: black;
+}
+
+.SizeSelector-small {
+    padding: 1rem;
+}
+
+.SizeSelector-medium {
+    padding: 1.3rem;
+}
+
+.SizeSelector-large {
+    padding: 1.65rem;
+}
+
+.SizeSelector-extra-large {
+    padding: 2rem;
 }

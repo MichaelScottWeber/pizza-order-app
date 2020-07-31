@@ -47,6 +47,12 @@ class Body extends Component {
             this.setState({ currentItem: currentItem })
         }
     }
+
+    sizeSelect = (e) => {
+        let currentItem = this.state.currentItem;
+        currentItem.defaultSize = e;
+        this.setState({ currentItem: currentItem })
+    }
     
     render() { 
         if (this.state.view === 'MenuCategoryList') {
@@ -82,6 +88,7 @@ class Body extends Component {
                         currentItem={this.state.currentItem} 
                         quantityIncrease={this.quantityIncrease}
                         quantityDecrease={this.quantityDecrease}
+                        sizeSelect={this.sizeSelect}
                     />
                 </div>
             )
