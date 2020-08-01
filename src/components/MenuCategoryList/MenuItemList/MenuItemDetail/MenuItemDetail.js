@@ -27,7 +27,7 @@ class MenuItemDetail extends Component {
 
     render() { 
 
-        const { category, currentItem, quantityIncrease, quantityDecrease, sizeSelect } = this.props;
+        const { category, currentItem, quantityIncrease, quantityDecrease, sizeSelect, crustSelect } = this.props;
 
         return (  
             <div className="MenuItemDetail">
@@ -39,8 +39,8 @@ class MenuItemDetail extends Component {
                     quantityIncrease={quantityIncrease}
                     quantityDecrease={quantityDecrease}
                 />
-                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.defaultSize} sizeSelect={sizeSelect} /> : ''}
-                {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} /> : ''}
+                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} /> : ''}
+                {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} /> : ''}
                 {category.category === 'Pizzas' ? <SauceSelector /> : ''}
             </div>
         );

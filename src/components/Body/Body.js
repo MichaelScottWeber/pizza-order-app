@@ -50,7 +50,13 @@ class Body extends Component {
 
     sizeSelect = (e) => {
         let currentItem = this.state.currentItem;
-        currentItem.defaultSize = e;
+        currentItem.currentSize = e;
+        this.setState({ currentItem: currentItem })
+    }
+
+    crustSelect = (e) => {
+        let currentItem = this.state.currentItem;
+        currentItem.ingredients.crust = e;
         this.setState({ currentItem: currentItem })
     }
     
@@ -89,6 +95,7 @@ class Body extends Component {
                         quantityIncrease={this.quantityIncrease}
                         quantityDecrease={this.quantityDecrease}
                         sizeSelect={this.sizeSelect}
+                        crustSelect={this.crustSelect}
                     />
                 </div>
             )

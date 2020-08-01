@@ -10,6 +10,8 @@ import { ReactComponent as DeepDishSelected } from '../../../../../img/Deep-Dish
 
 class CrustSelector extends Component {
 
+    handleClick = (e) => this.props.crustSelect(e);
+
     crustIcon = (crust) => {
         if (crust === 'thin') {
             if (crust === this.props.crust) {
@@ -42,7 +44,7 @@ class CrustSelector extends Component {
                         name={crust.type}
                         type='button'
                         onClick={() => {
-                            console.log(crust.type);
+                            this.handleClick(crust.type)
                         }}
                     >
                         {this.crustIcon(crust.type)}

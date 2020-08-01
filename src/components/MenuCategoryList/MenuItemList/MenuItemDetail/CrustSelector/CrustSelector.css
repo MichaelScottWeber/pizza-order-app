@@ -1,0 +1,11 @@
+.CrustSelector div {
+    display: inline-block;
+    margin: 1em;
+}
+
+.CrustSelector button {
+    background-color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+}
