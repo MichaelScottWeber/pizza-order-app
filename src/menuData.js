@@ -21,7 +21,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: []
                 },
@@ -42,7 +42,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: []
                 },
@@ -63,7 +63,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: [
                         {
@@ -91,7 +91,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: [
                         {
@@ -119,7 +119,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: [
                         {
@@ -159,7 +159,7 @@ const menuData = [
                 specialInstructions: '',
                 ingredients: {
                     crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normail' },
+                    sauce: { type: 'tomato', amount: 'normal' },
                     cheese: { include: true, split: 'whole', amount: 'normal' },
                     toppings: [
                         {

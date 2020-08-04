@@ -1,0 +1,7 @@
+.SauceSelector-type, .SauceSelector-amount {
+    margin: 10px;
+}
+
+.SauceSelector-type div, .SauceSelector-amount div {
+    display: inline-block;
+}

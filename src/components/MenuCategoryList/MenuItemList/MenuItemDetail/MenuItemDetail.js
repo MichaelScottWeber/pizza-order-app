@@ -3,6 +3,7 @@ import QuantitySelector from './QuantitySelector/QuantitySelector';
 import SizeSelector from './SizeSelector/SizeSelector';
 import CrustSelector from './CrustSelector/CrustSelector';
 import SauceSelector from './SauceSelector/SauceSelector';
+import CheeseSelector from './CheeseSelector/CheeseSelector';
 import './MenuItemDetail.css';
 
 class MenuItemDetail extends Component {
@@ -27,7 +28,7 @@ class MenuItemDetail extends Component {
 
     render() { 
 
-        const { category, currentItem, quantityIncrease, quantityDecrease, sizeSelect, crustSelect } = this.props;
+        const { category, currentItem, quantityIncrease, quantityDecrease, sizeSelect, crustSelect, sauceTypeSelect, sauceAmountSelect, optionSelect, cheeseInclude, cheeseSplit } = this.props;
 
         return (  
             <div className="MenuItemDetail">
@@ -39,9 +40,10 @@ class MenuItemDetail extends Component {
                     quantityIncrease={quantityIncrease}
                     quantityDecrease={quantityDecrease}
                 />
-                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} /> : ''}
+                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} /> : ''}
                 {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} /> : ''}
-                {category.category === 'Pizzas' ? <SauceSelector /> : ''}
+                {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} /> : ''}
+                {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} /> : ''}
             </div>
         );
     }
