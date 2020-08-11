@@ -78,9 +78,46 @@ class Body extends Component {
         this.setState({ currentItem: currentItem });
     }
 
-    cheeseSplit = (e) => {
+    cheeseAmountSelect = (e) => {
         let currentItem = this.state.currentItem;
-        currentItem.ingredients.cheese.split = e;
+        currentItem.ingredients.cheese.amount = e;
+        this.setState({ currentItem: currentItem });
+    }
+
+    cheeseSplit = (split) => {
+        let currentItem = this.state.currentItem;
+        currentItem.ingredients.cheese.split = split;
+        this.setState({ currentItem: currentItem });
+    }
+
+    toppingAdd = (e) => {
+        let currentItem = this.state.currentItem;
+        currentItem.ingredients.toppings.push({
+            name: e.type,
+            split: 'whole',
+            amount: 'normal'
+        });
+        this.setState({ currentItem: currentItem });
+    }
+
+    toppingRemove = (e) => {
+        let currentItem = this.state.currentItem;
+        let index = currentItem.ingredients.toppings.indexOf(e)
+        if (index > -1) {
+            currentItem.ingredients.toppings.splice(index, 1);
+        }
+        this.setState({ currentItem: currentItem });
+    }
+
+    toppingSplit = (split, index) => {
+        let currentItem = this.state.currentItem;
+        currentItem.ingredients.toppings[index].split = split;
+        this.setState({ currentItem: currentItem });
+    }
+
+    toppingAmountSelect = (amount, index) => {
+        let currentItem = this.state.currentItem;
+        currentItem.ingredients.toppings[index].amount = amount;
         this.setState({ currentItem: currentItem });
     }
 
@@ -130,6 +167,11 @@ class Body extends Component {
                         sauceAmountSelect={this.sauceAmountSelect}
                         cheeseInclude={this.cheeseInclude}
                         cheeseSplit={this.cheeseSplit}
+                        cheeseAmountSelect={this.cheeseAmountSelect}
+                        toppingAdd={this.toppingAdd}
+                        toppingRemove={this.toppingRemove}
+                        toppingSplit={this.toppingSplit}
+                        toppingAmountSelect={this.toppingAmountSelect}
                     />
                 </div>
             )

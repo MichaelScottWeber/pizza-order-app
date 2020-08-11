@@ -4,31 +4,31 @@ import SizeSelector from './SizeSelector/SizeSelector';
 import CrustSelector from './CrustSelector/CrustSelector';
 import SauceSelector from './SauceSelector/SauceSelector';
 import CheeseSelector from './CheeseSelector/CheeseSelector';
+import ToppingsList from './ToppingsList/ToppingsList';
 import './MenuItemDetail.css';
 
 class MenuItemDetail extends Component {
 
-    // state = {
-    //     currentItem: this.props.currentItem,
-    // }
-
-    // quantityIncrease = (e) => {
-    //     let item = this.state.currentItem;
-    //     item.quantity++;
-    //     this.setState({ currentItem: item })
-    // }
-
-    // quantityDecrease = (e) => {
-    //     let item = this.state.currentItem;
-    //     if (item.quantity > 1) {
-    //         item.quantity--;
-    //         this.setState({ currentItem: item })
-    //     }
-    // }
-
     render() { 
 
-        const { category, currentItem, quantityIncrease, quantityDecrease, sizeSelect, crustSelect, sauceTypeSelect, sauceAmountSelect, optionSelect, cheeseInclude, cheeseSplit } = this.props;
+        const { 
+            category, 
+            currentItem, 
+            quantityIncrease, 
+            quantityDecrease, 
+            sizeSelect, 
+            crustSelect, 
+            sauceTypeSelect, 
+            sauceAmountSelect, 
+            optionSelect, 
+            cheeseInclude, 
+            cheeseSplit, 
+            cheeseAmountSelect, 
+            toppingAdd, 
+            toppingRemove, 
+            toppingSplit,
+            toppingAmountSelect,
+        } = this.props;
 
         return (  
             <div className="MenuItemDetail">
@@ -43,7 +43,8 @@ class MenuItemDetail extends Component {
                 {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} /> : ''}
                 {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} /> : ''}
                 {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} /> : ''}
-                {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} /> : ''}
+                {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
+                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} /> : ''}
             </div>
         );
     }

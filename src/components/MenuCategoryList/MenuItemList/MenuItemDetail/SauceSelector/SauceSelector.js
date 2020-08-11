@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import AmountSelect from '../AmountSelect/AmountSelect';
 import ingredientsData from '../../../../../ingredientsData';
 import './SauceSelector.css';
 
 class SauceSelector extends Component {
 
     handleSauceChange = (e) => this.props.sauceTypeSelect(e);
-
-    handleAmountChange = (e) => this.props.sauceAmountSelect(e);
 
     render() { 
         let sauceList = ingredientsData.sauce.map((sauce, index) => {
@@ -26,28 +25,11 @@ class SauceSelector extends Component {
             )
         })
 
-        let amountList = ['easy', 'normal', 'extra'].map((amount, index) => {
-            return (
-                <div key={amount}>
-                    <input 
-                    name='amount'
-                    id={amount}
-                    type='radio'
-                    onChange={() => {
-                        this.handleAmountChange(amount);
-                    }}
-                    checked={this.props.sauce.amount === amount}
-                    />
-                    <label htmlFor={amount}>{amount}</label>
-                </div>
-            )
-        })
-
         return (  
             <div className='SauceSelector'>
                 <h3>Sauce:</h3>
                 <div className='SauceSelector-type'>{sauceList}</div>
-                <div className='SauceSelector-amount'>{amountList}</div>
+                <AmountSelect name='sauce-amount' currentAmount={this.props.sauce.amount} amountSelect={this.props.sauceAmountSelect} />
             </div>
         );
     }
