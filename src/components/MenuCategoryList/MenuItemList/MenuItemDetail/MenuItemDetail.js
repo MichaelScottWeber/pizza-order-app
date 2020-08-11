@@ -4,6 +4,7 @@ import SizeSelector from './SizeSelector/SizeSelector';
 import CrustSelector from './CrustSelector/CrustSelector';
 import SauceSelector from './SauceSelector/SauceSelector';
 import CheeseSelector from './CheeseSelector/CheeseSelector';
+import SpecialInstructions from './SpecialInstructions/SpecialInstructions'
 import ToppingsList from './ToppingsList/ToppingsList';
 import './MenuItemDetail.css';
 
@@ -28,6 +29,7 @@ class MenuItemDetail extends Component {
             toppingRemove, 
             toppingSplit,
             toppingAmountSelect,
+            recieveSpecialInstructions,
         } = this.props;
 
         return (  
@@ -44,6 +46,7 @@ class MenuItemDetail extends Component {
                 {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} /> : ''}
                 {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} /> : ''}
                 {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
+                <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
                 {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} /> : ''}
             </div>
         );

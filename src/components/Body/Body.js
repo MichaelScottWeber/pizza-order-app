@@ -121,6 +121,12 @@ class Body extends Component {
         this.setState({ currentItem: currentItem });
     }
 
+    recieveSpecialInstructions = (e) => {
+        let currentItem = this.state.currentItem;
+        currentItem.specialInstructions = e.target.value;
+        this.setState({ currentItem: currentItem });
+    }
+
     // optionSelect = (option, selection) => {
     //     let currentItem = this.state.currentItem;
     //     currentItem[option] = selection;
@@ -172,6 +178,7 @@ class Body extends Component {
                         toppingRemove={this.toppingRemove}
                         toppingSplit={this.toppingSplit}
                         toppingAmountSelect={this.toppingAmountSelect}
+                        recieveSpecialInstructions={this.recieveSpecialInstructions}
                     />
                 </div>
             )
