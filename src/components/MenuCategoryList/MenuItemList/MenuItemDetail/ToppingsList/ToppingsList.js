@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AmountSelect from '../AmountSelect/AmountSelect';
 import SplitSelect from '../SplitSelect/SplitSelect';
-import ToppingSelector from './ToppingSelector/ToppingSelector';
 import ingredientsData from '../../../../../ingredientsData';
 import './ToppingsList.css';
 
@@ -11,11 +10,11 @@ class ToppingsList extends Component {
     
     render() { 
         const allToppings = ingredientsData.toppings.map((topping, index) => {
-    
             const includedTopping = this.props.currentItem.ingredients.toppings.find(e => e.name === topping.type)
 
             if (includedTopping) {
                 const index = this.props.currentItem.ingredients.toppings.indexOf(includedTopping)
+
                 return (
                     <div key={includedTopping.name}>
                         <h4>{includedTopping.name}</h4>
@@ -31,10 +30,10 @@ class ToppingsList extends Component {
                             path={this.props.currentItem.ingredients.toppings[index]}
                         />
                         <AmountSelect 
-                        name={includedTopping.name} 
-                        currentAmount={includedTopping.amount} 
-                        amountSelect={this.props.toppingAmountSelect} 
-                        index={index}
+                            name={includedTopping.name} 
+                            currentAmount={includedTopping.amount} 
+                            amountSelect={this.props.toppingAmountSelect} 
+                            index={index}
                         />
                     </div>
                 )

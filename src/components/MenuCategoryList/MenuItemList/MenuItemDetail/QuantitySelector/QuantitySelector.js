@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 import './QuantitySelector.css';
 
 class QuantitySelector extends Component {
-    handlePlusClick = () => this.props.quantityIncrease();
+    handlePlusClick = () => {
+        this.props.quantityIncrease();
+        this.props.updatePrice();
+    }
 
-    handleMinusClick = () => this.props.quantityDecrease();
+    handleMinusClick = () => {
+        this.props.quantityDecrease();
+        this.props.updatePrice();
+    }
 
     render() { 
         return (  

@@ -6,9 +6,15 @@ import MenuItemList from '../MenuCategoryList/MenuItemList/MenuItemList';
 import MenuItemDetail from '../MenuCategoryList/MenuItemList/MenuItemDetail/MenuItemDetail';
 
 import menuData from '../../menuData';
+import ingredientsData from '../../ingredientsData';
+
 import './Body.css';
 
 class Body extends Component {
+    static defaultProps = { 
+        menuData: [...menuData]
+    }
+
     state = {  
         view: 'MenuCategoryList',
         category: null,
@@ -19,29 +25,33 @@ class Body extends Component {
     categorySelect = (cat) => {
         this.setState({ 
             view: 'MenuItemList',
-            category: cat
+            category: {...cat}
         });
     }
 
     itemSelect = (item) => {
+        if (this.state.category.category === 'Pizzas') {
+            let index = item.availableSizes.findIndex(e => e.size === item.currentSize);
+            item.currentPrice = item.availableSizes[index].price;
+        }
         this.setState({
             view: 'MenuItemDetail',
-            currentItem: item
+            currentItem: {...item}
         })
     }
 
-    backToCategoryList = (e) => this.setState({ view: 'MenuCategoryList' });
+    backToCategoryList = () => this.setState({ view: 'MenuCategoryList' });
 
-    backToMenuItemList = (e) => this.setState({ view: 'MenuItemList' });
+    backToMenuItemList = () => this.setState({ view: 'MenuItemList' });
 
-    quantityIncrease = (e) => {
-        let currentItem = this.state.currentItem;
+    quantityIncrease = () => {
+        const currentItem = this.state.currentItem;
         currentItem.quantity++;
         this.setState({ currentItem: currentItem });
     }
 
-    quantityDecrease = (e) => {
-        let currentItem = this.state.currentItem;
+    quantityDecrease = () => {
+        const currentItem = this.state.currentItem;
         if (currentItem.quantity > 1) {
             currentItem.quantity--;
             this.setState({ currentItem: currentItem });
@@ -49,49 +59,49 @@ class Body extends Component {
     }
 
     sizeSelect = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.currentSize = e;
         this.setState({ currentItem: currentItem });
     }
 
     crustSelect = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.crust = e;
         this.setState({ currentItem: currentItem });
     }
 
     sauceTypeSelect = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.sauce.type = e;
         this.setState({ currentItem: currentItem });
     }
 
     sauceAmountSelect = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.sauce.amount = e;
         this.setState({ currentItem: currentItem });
     }
 
-    cheeseInclude = (e) => {
-        let currentItem = this.state.currentItem;
+    cheeseInclude = () => {
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.cheese.include ? currentItem.ingredients.cheese.include = false : currentItem.ingredients.cheese.include = true;
         this.setState({ currentItem: currentItem });
     }
 
     cheeseAmountSelect = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.cheese.amount = e;
         this.setState({ currentItem: currentItem });
     }
 
     cheeseSplit = (split) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.cheese.split = split;
         this.setState({ currentItem: currentItem });
     }
 
     toppingAdd = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.toppings.push({
             name: e.type,
             split: 'whole',
@@ -101,7 +111,7 @@ class Body extends Component {
     }
 
     toppingRemove = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         let index = currentItem.ingredients.toppings.indexOf(e)
         if (index > -1) {
             currentItem.ingredients.toppings.splice(index, 1);
@@ -110,20 +120,44 @@ class Body extends Component {
     }
 
     toppingSplit = (split, index) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.toppings[index].split = split;
         this.setState({ currentItem: currentItem });
     }
 
     toppingAmountSelect = (amount, index) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.ingredients.toppings[index].amount = amount;
         this.setState({ currentItem: currentItem });
     }
 
     recieveSpecialInstructions = (e) => {
-        let currentItem = this.state.currentItem;
+        const currentItem = this.state.currentItem;
         currentItem.specialInstructions = e.target.value;
+        this.setState({ currentItem: currentItem });
+    }
+
+    updatePrice = () => {
+        // Need to pull base price instead of currentPrice
+        const currentItem = this.state.currentItem;
+        let newPrice;
+
+        if (this.state.category.category === 'Pizzas') {
+            let sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
+
+            let crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.ingredients.crust);
+            let crustPrice = ingredientsData.crust[crustIndex].price;
+
+            let sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.ingredients.sauce.type);
+            let saucePrice = ingredientsData.sauce[sauceIndex].price;
+
+            newPrice = currentItem.availableSizes[sizeIndex].price + crustPrice + saucePrice;            
+        } else {
+            newPrice = currentItem.currentPrice;
+        }
+
+        currentItem.currentPrice = newPrice * currentItem.quantity;
+
         this.setState({ currentItem: currentItem });
     }
 
@@ -140,7 +174,10 @@ class Body extends Component {
                     <div className="Body-top-button-container">
                         <Button text="Cart" />
                     </div>
-                    <MenuCategoryList menuData={menuData} categorySelect={this.categorySelect} />
+                    <MenuCategoryList 
+                        menuData={this.props.menuData} 
+                        categorySelect={this.categorySelect} 
+                    />
                 </div>
             );
         }
@@ -151,7 +188,10 @@ class Body extends Component {
                         <Button text="Cart" />
                         <Button text="Back" buttonClick={this.backToCategoryList} />
                     </div>
-                    <MenuItemList category={this.state.category} itemSelect={this.itemSelect} />
+                    <MenuItemList 
+                        category={this.state.category} 
+                        itemSelect={this.itemSelect} 
+                    />
                 </div>
             )
         }
@@ -179,6 +219,7 @@ class Body extends Component {
                         toppingSplit={this.toppingSplit}
                         toppingAmountSelect={this.toppingAmountSelect}
                         recieveSpecialInstructions={this.recieveSpecialInstructions}
+                        updatePrice={this.updatePrice}
                     />
                 </div>
             )

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Button from '../../../Button/Button';
 import QuantitySelector from './QuantitySelector/QuantitySelector';
 import SizeSelector from './SizeSelector/SizeSelector';
 import CrustSelector from './CrustSelector/CrustSelector';
@@ -9,6 +10,16 @@ import ToppingsList from './ToppingsList/ToppingsList';
 import './MenuItemDetail.css';
 
 class MenuItemDetail extends Component {
+
+    handleClick = () => {
+        console.log(this.props.currentItem.currentPrice);
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.currentItem.quantity !== prevProps.currentItem.quantity) {
+            this.props.updatePrice();
+        }
+    }
 
     render() { 
 
@@ -30,6 +41,7 @@ class MenuItemDetail extends Component {
             toppingSplit,
             toppingAmountSelect,
             recieveSpecialInstructions,
+            updatePrice,
         } = this.props;
 
         return (  
@@ -37,17 +49,32 @@ class MenuItemDetail extends Component {
                 <img src={currentItem.imageUrl} alt={currentItem.imageUrl} />
                 <h2>{currentItem.name}</h2>
                 <p>{currentItem.description}</p>
+
                 <QuantitySelector 
                     quantity={currentItem.quantity}
                     quantityIncrease={quantityIncrease}
                     quantityDecrease={quantityDecrease}
+                    updatePrice={updatePrice}
                 />
-                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} /> : ''}
-                {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} /> : ''}
-                {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} /> : ''}
+
+                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} updatePrice={updatePrice} /> : ''}
+
+                {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} updatePrice={updatePrice} /> : ''}
+
+                {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} updatePrice={updatePrice} /> : ''}
+
                 {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
+
                 <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
-                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} /> : ''}
+
+                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
+
+                <div className='MenuItemDetail-add-to-order'>
+                    <Button
+                        buttonClick={this.handleClick}
+                        text={`Add to order $${currentItem.currentPrice}`} 
+                    />
+                </div>
             </div>
         );
     }

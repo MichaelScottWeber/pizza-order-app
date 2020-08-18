@@ -12,6 +12,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1509403491765-9fb9d773ca6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 8.99 },
                     { size: 'medium', price: 11.99 },
@@ -33,6 +34,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1583990504911-89fcd98d0c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 8.99 },
                     { size: 'medium', price: 11.99 },
@@ -54,6 +56,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1591484506290-803ed645eb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 9.49 },
                     { size: 'medium', price: 12.49 },
@@ -82,6 +85,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1590083745251-4fdb0b285c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 9.49 },
                     { size: 'medium', price: 12.49 },
@@ -110,6 +114,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 9.99 },
                     { size: 'medium', price: 12.99 },
@@ -150,6 +155,7 @@ const menuData = [
                 imageUrl: 'https://images.unsplash.com/photo-1527133256227-fc3549f55332?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
                 quantity: 1,
                 currentSize: 'large',
+                currentPrice: null,
                 availableSizes: [
                     { size: 'small', price: 9.99 },
                     { size: 'medium', price: 12.99 },
@@ -191,7 +197,7 @@ const menuData = [
                 description: 'Fried mozzerella cheese, with a marinera dipping sauce.',
                 quantity: 1,
                 imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-                price: 9.99
+                currentPrice: 9.99
             },
             {
                 id: 202,
@@ -199,7 +205,7 @@ const menuData = [
                 description: 'Fried breast-meat chicken, dipped in buffalo sauce.  Comes with ranch dressing and celery sricks.',
                 quantity: 1,
                 imageUrl: 'https://images.unsplash.com/photo-1571162437205-8889ff2fee26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
-                price: 9.99
+                currentPrice: 9.99
             },
         ]
     }

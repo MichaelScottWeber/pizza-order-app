@@ -11,7 +11,7 @@ class SpecialInstructions extends Component {
         return (  
             <div className='SpecialInstructions'>
                 <label>Special Instructions</label>
-                <textArea 
+                <textarea 
                     value={this.props.currentItem.specialInstructions}
                     onChange={this.handleChange}
                 />

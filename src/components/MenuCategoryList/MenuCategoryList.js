@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import menuData from '../../menuData';
+// import menuData from '../../menuData';
 import './MenuCategoryList.css';
 
 class MenuCategoryList extends Component {
 
     handleClick = (e) => this.props.categorySelect(e);
 
-    categoryList = menuData.map(cat => {
+    categoryList = this.props.menuData.map(cat => {
         return (
             <li 
                 className="MenuCategoryList-item" 

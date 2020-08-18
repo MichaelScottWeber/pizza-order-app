@@ -5,7 +5,7 @@ class MenuItemList extends Component {
 
     displayPrice = (item) => {
         if (!item.availableSizes) {
-            return <span>${item.price}</span>
+            return <span>${item.currentPrice}</span>
         } else {
             let listPrices = item.availableSizes.map((size, index) => {
                 return (

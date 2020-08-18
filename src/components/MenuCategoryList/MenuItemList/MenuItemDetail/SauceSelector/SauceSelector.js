@@ -5,7 +5,10 @@ import './SauceSelector.css';
 
 class SauceSelector extends Component {
 
-    handleSauceChange = (e) => this.props.sauceTypeSelect(e);
+    handleSauceChange = (e) => {
+        this.props.sauceTypeSelect(e);
+        this.props.updatePrice();
+    }
 
     render() { 
         let sauceList = ingredientsData.sauce.map((sauce, index) => {

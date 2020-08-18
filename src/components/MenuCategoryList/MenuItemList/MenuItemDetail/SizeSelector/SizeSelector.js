@@ -11,7 +11,10 @@ import { ReactComponent as SmallSelected } from '../../../../../img/Small-Select
 
 class SizeSelector extends Component {
 
-    handleClick = (e) => this.props.sizeSelect(e);
+    handleClick = (e) => {
+        this.props.sizeSelect(e);
+        this.props.updatePrice();
+    }
 
     sizeIcon =(size) => {
         if (size === 'extra-large') {
