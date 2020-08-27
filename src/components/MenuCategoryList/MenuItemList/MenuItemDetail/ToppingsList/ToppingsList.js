@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AmountSelect from '../AmountSelect/AmountSelect';
 import SplitSelect from '../SplitSelect/SplitSelect';
-import ingredientsData from '../../../../../ingredientsData';
+// import ingredientsData from '../../../../../ingredientsData';
 import './ToppingsList.css';
 
 class ToppingsList extends Component {
@@ -9,7 +9,7 @@ class ToppingsList extends Component {
     // handleIncludeOff = e => this.props.toppingAdd(e);
     
     render() { 
-        const allToppings = ingredientsData.toppings.map((topping, index) => {
+        const allToppings = this.props.ingredientsData.toppings.map((topping, index) => {
             const includedTopping = this.props.currentItem.ingredients.toppings.find(e => e.name === topping.type)
 
             if (includedTopping) {
@@ -21,8 +21,11 @@ class ToppingsList extends Component {
                         <input
                             type='checkbox'
                             id={includedTopping.name}
-                            checked={includedTopping}
-                            onChange={() => this.props.toppingRemove(includedTopping)}
+                            checked={true}
+                            onChange={() => {
+                                this.props.toppingRemove(includedTopping)
+                                this.props.updatePrice();
+                            }}
                         />
                         <SplitSelect 
                             index={index} 
@@ -44,13 +47,17 @@ class ToppingsList extends Component {
                         <input
                             type='checkbox'
                             id={topping.type}
-                            checked={includedTopping}
-                            onChange={() => this.props.toppingAdd(topping)}
+                            checked={false}
+                            onChange={() => {
+                                this.props.toppingAdd(topping);
+                                this.props.updatePrice();
+                            }}
                         />
                     </div>
                 )
             }
         })
+
         return (  
             <div className='ToppingsList'>
                 <h3>Toppings</h3>

@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import MenuCategoryList from '../MenuCategoryList/MenuCategoryList';
 import MenuItemList from '../MenuCategoryList/MenuItemList/MenuItemList';
 import MenuItemDetail from '../MenuCategoryList/MenuItemList/MenuItemDetail/MenuItemDetail';
+import Cart from '../Cart/Cart';
 
 import menuData from '../../menuData';
 import ingredientsData from '../../ingredientsData';
@@ -40,14 +41,13 @@ class Body extends Component {
         })
     }
 
-    backToCategoryList = () => this.setState({ view: 'MenuCategoryList' });
-
-    backToMenuItemList = () => this.setState({ view: 'MenuItemList' });
+    changeView = (view) => this.setState({ view: view })
 
     quantityIncrease = () => {
         const currentItem = this.state.currentItem;
         currentItem.quantity++;
         this.setState({ currentItem: currentItem });
+        this.updatePrice();
     }
 
     quantityDecrease = () => {
@@ -56,6 +56,7 @@ class Body extends Component {
             currentItem.quantity--;
             this.setState({ currentItem: currentItem });
         }
+        this.updatePrice();
     }
 
     sizeSelect = (e) => {
@@ -105,7 +106,8 @@ class Body extends Component {
         currentItem.ingredients.toppings.push({
             name: e.type,
             split: 'whole',
-            amount: 'normal'
+            amount: 'normal',
+            price: e.price
         });
         this.setState({ currentItem: currentItem });
     }
@@ -138,27 +140,47 @@ class Body extends Component {
     }
 
     updatePrice = () => {
-        // Need to pull base price instead of currentPrice
         const currentItem = this.state.currentItem;
         let newPrice;
 
         if (this.state.category.category === 'Pizzas') {
-            let sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
+            const sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
 
-            let crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.ingredients.crust);
-            let crustPrice = ingredientsData.crust[crustIndex].price;
+            const crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.ingredients.crust);
+            const crustPrice = ingredientsData.crust[crustIndex].price;
 
-            let sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.ingredients.sauce.type);
-            let saucePrice = ingredientsData.sauce[sauceIndex].price;
+            const sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.ingredients.sauce.type);
+            const saucePrice = ingredientsData.sauce[sauceIndex].price;
 
-            newPrice = currentItem.availableSizes[sizeIndex].price + crustPrice + saucePrice;            
+            let toppingsPrice = 0;
+            currentItem.ingredients.toppings.forEach(topping => {
+                if (topping.price) {
+                    toppingsPrice += topping.price;
+                }
+            })
+
+            newPrice = currentItem.availableSizes[sizeIndex].price + crustPrice + saucePrice + toppingsPrice;
         } else {
-            newPrice = currentItem.currentPrice;
+            const itemIndex = this.state.category.items.findIndex(e => e.name === currentItem.name);
+
+            newPrice = this.state.category.items[itemIndex].currentPrice;
         }
 
         currentItem.currentPrice = newPrice * currentItem.quantity;
 
         this.setState({ currentItem: currentItem });
+    }
+
+    addToCart = () => {
+        const cart = [...this.state.cart, this.state.currentItem];
+        this.setState({ cart: cart })
+    }
+
+    removeFromCart = (index) => {
+        let cart = [...this.state.cart];
+        console.log(index);
+        cart.splice(index, 1)
+        this.setState({ cart: cart });
     }
 
     // optionSelect = (option, selection) => {
@@ -172,7 +194,7 @@ class Body extends Component {
             return (
                 <div className="Body">
                     <div className="Body-top-button-container">
-                        <Button text="Cart" />
+                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
                     </div>
                     <MenuCategoryList 
                         menuData={this.props.menuData} 
@@ -185,8 +207,8 @@ class Body extends Component {
             return (
                 <div className="Body">
                     <div className="Body-top-button-container">
-                        <Button text="Cart" />
-                        <Button text="Back" buttonClick={this.backToCategoryList} />
+                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
+                        <Button text="Back" buttonClick={() => this.changeView('MenuCategoryList')} />
                     </div>
                     <MenuItemList 
                         category={this.state.category} 
@@ -199,8 +221,8 @@ class Body extends Component {
             return (
                 <div className="Body">
                     <div className="Body-top-button-container">
-                        <Button text="Cart" />
-                        <Button text="Back" buttonClick={this.backToMenuItemList} />
+                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
+                        <Button text="Back" buttonClick={() => this.changeView('MenuItemList')} />
                     </div>
                     <MenuItemDetail 
                         category={this.state.category}
@@ -220,7 +242,28 @@ class Body extends Component {
                         toppingAmountSelect={this.toppingAmountSelect}
                         recieveSpecialInstructions={this.recieveSpecialInstructions}
                         updatePrice={this.updatePrice}
+                        ingredientsData={ingredientsData}
+                        addToCart={this.addToCart}
+                        changeView={this.changeView}
                     />
+                </div>
+            )
+        }
+        if (this.state.view === 'ItemAdded') {
+            return (
+                <div className='Body'>
+                    {/* <ItemAdded /> */}
+                    Hurray, your item has been added to the cart!
+                    <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
+                    <Button text="View Cart" buttonClick={() => this.changeView('Cart')} />
+                </div>
+            )
+        }
+        if (this.state.view === 'Cart') {
+            return (
+                <div className='Body'>
+                    <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
+                    <Cart cart={this.state.cart} removeFromCart={this.removeFromCart} />
                 </div>
             )
         }

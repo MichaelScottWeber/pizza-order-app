@@ -4,12 +4,13 @@ import './QuantitySelector.css';
 class QuantitySelector extends Component {
     handlePlusClick = () => {
         this.props.quantityIncrease();
-        this.props.updatePrice();
+        // this.props.updatePrice();
     }
 
     handleMinusClick = () => {
         this.props.quantityDecrease();
-        this.props.updatePrice();
+        // this.props.updatePrice();
+        // console.log('minused!')
     }
 
     render() { 

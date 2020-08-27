@@ -12,14 +12,15 @@ import './MenuItemDetail.css';
 class MenuItemDetail extends Component {
 
     handleClick = () => {
-        console.log(this.props.currentItem.currentPrice);
+        this.props.addToCart();
+        this.props.changeView('ItemAdded');
     }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.currentItem.quantity !== prevProps.currentItem.quantity) {
-            this.props.updatePrice();
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (this.props.currentItem.quantity !== prevProps.currentItem.quantity) {
+    //         this.props.updatePrice();
+    //     }
+    // }
 
     render() { 
 
@@ -42,6 +43,7 @@ class MenuItemDetail extends Component {
             toppingAmountSelect,
             recieveSpecialInstructions,
             updatePrice,
+            ingredientsData,
         } = this.props;
 
         return (  
@@ -67,7 +69,7 @@ class MenuItemDetail extends Component {
 
                 <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
 
-                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
+                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
 
                 <div className='MenuItemDetail-add-to-order'>
                     <Button
