@@ -20,7 +20,8 @@ class Body extends Component {
         view: 'MenuCategoryList',
         category: null,
         currentItem: null,
-        cart: []
+        cart: [],
+        editing: { isEditing: false, itemIndex: null }
     }
 
     categorySelect = (cat) => {
@@ -178,8 +179,37 @@ class Body extends Component {
 
     removeFromCart = (index) => {
         let cart = [...this.state.cart];
-        console.log(index);
         cart.splice(index, 1)
+        this.setState({ cart: cart });
+    }
+
+    // This needs to change the category also
+    editCartItem = (item, index) => {
+        this.props.menuData.forEach(cat => {
+            cat.items.forEach(i => {
+                if (i.name === item.name) {
+                    console.log(cat.category)
+                    this.setState({ category: {...cat} })
+                }
+            })
+        })
+        this.setState({
+            editing: { isEditing: true, itemIndex: index },
+            currentItem: {...item},
+            view: 'MenuItemDetail',
+        })
+    }
+
+    cancelEdit = () => {
+        this.setState({
+            editing: { isEditing: false, itemIndex: null },
+            view: 'Cart'
+        })
+    }
+
+    updateCartItem = (item, index) => {
+        let cart = [...this.state.cart];
+        cart.splice(index, 1, item);
         this.setState({ cart: cart });
     }
 
@@ -193,9 +223,11 @@ class Body extends Component {
         if (this.state.view === 'MenuCategoryList') {
             return (
                 <div className="Body">
-                    <div className="Body-top-button-container">
-                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
-                    </div>
+                    {this.state.editing.isEditing === false ? 
+                        <div className="Body-top-button-container">
+                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                        </div>
+                    : ''}
                     <MenuCategoryList 
                         menuData={this.props.menuData} 
                         categorySelect={this.categorySelect} 
@@ -206,10 +238,12 @@ class Body extends Component {
         if (this.state.view === 'MenuItemList') {
             return (
                 <div className="Body">
-                    <div className="Body-top-button-container">
-                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
-                        <Button text="Back" buttonClick={() => this.changeView('MenuCategoryList')} />
-                    </div>
+                    {this.state.editing.isEditing === false ?
+                        <div className="Body-top-button-container">
+                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                            <Button text="Back" buttonClick={() => this.changeView('MenuCategoryList')} />
+                        </div>
+                    : ''}
                     <MenuItemList 
                         category={this.state.category} 
                         itemSelect={this.itemSelect} 
@@ -220,10 +254,12 @@ class Body extends Component {
         if (this.state.view === 'MenuItemDetail') {
             return (
                 <div className="Body">
-                    <div className="Body-top-button-container">
-                        <Button text="Cart" buttonClick={() => alert('cart doesnt exist yet')} />
-                        <Button text="Back" buttonClick={() => this.changeView('MenuItemList')} />
-                    </div>
+                    {this.state.editing.isEditing === false ?
+                        <div className="Body-top-button-container">
+                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                            <Button text="Back" buttonClick={() => this.changeView('MenuItemList')} />
+                        </div>
+                    : ''}
                     <MenuItemDetail 
                         category={this.state.category}
                         currentItem={this.state.currentItem} 
@@ -245,6 +281,9 @@ class Body extends Component {
                         ingredientsData={ingredientsData}
                         addToCart={this.addToCart}
                         changeView={this.changeView}
+                        editing={this.state.editing}
+                        cancelEdit={this.cancelEdit}
+                        updateCartItem={this.updateCartItem}
                     />
                 </div>
             )
@@ -263,7 +302,11 @@ class Body extends Component {
             return (
                 <div className='Body'>
                     <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
-                    <Cart cart={this.state.cart} removeFromCart={this.removeFromCart} />
+                    <Cart 
+                        cart={this.state.cart} 
+                        removeFromCart={this.removeFromCart} 
+                        editCartItem={this.editCartItem}
+                    />
                 </div>
             )
         }

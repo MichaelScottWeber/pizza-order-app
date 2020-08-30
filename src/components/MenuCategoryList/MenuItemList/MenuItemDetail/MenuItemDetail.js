@@ -11,9 +11,18 @@ import './MenuItemDetail.css';
 
 class MenuItemDetail extends Component {
 
-    handleClick = () => {
-        this.props.addToCart();
-        this.props.changeView('ItemAdded');
+    handleUpdateOrderClick = () => {
+        if (this.props.editing.isEditing) {
+            this.props.updateCartItem(this.props.currentItem, this.props.editing.itemIndex);
+            this.props.changeView('Cart');
+        } else {
+            this.props.addToCart();
+            this.props.changeView('ItemAdded');
+        }
+    }
+
+    handleCancelClick = () => {
+        this.props.cancelEdit();
     }
 
     // componentDidUpdate(prevProps) {
@@ -44,6 +53,7 @@ class MenuItemDetail extends Component {
             recieveSpecialInstructions,
             updatePrice,
             ingredientsData,
+            editing,
         } = this.props;
 
         return (  
@@ -61,21 +71,22 @@ class MenuItemDetail extends Component {
 
                 {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} updatePrice={updatePrice} /> : ''}
 
-                {category.category === 'Pizzas' ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} updatePrice={updatePrice} /> : ''}
+                {currentItem.ingredients ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} updatePrice={updatePrice} /> : ''}
 
-                {category.category === 'Pizzas' ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} updatePrice={updatePrice} /> : ''}
+                {currentItem.ingredients ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} updatePrice={updatePrice} /> : ''}
 
-                {category.category === 'Pizzas' ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
+                {currentItem.ingredients ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
 
                 <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
 
-                {category.category === 'Pizzas' ? <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
+                {currentItem.ingredients ? <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
 
                 <div className='MenuItemDetail-add-to-order'>
                     <Button
-                        buttonClick={this.handleClick}
-                        text={`Add to order $${currentItem.currentPrice}`} 
+                        buttonClick={this.handleUpdateOrderClick}
+                        text={editing.isEditing ? `Update item $${currentItem.currentPrice}` : `Add to order $${currentItem.currentPrice}`} 
                     />
+                    {editing.isEditing ? <Button buttonClick={this.handleCancelClick} text='Cancel' /> : ''}
                 </div>
             </div>
         );

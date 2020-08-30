@@ -6,6 +6,10 @@ class Cart extends Component {
         this.props.removeFromCart(index);
     }
 
+    handleEditClick = (item, index) => {
+        this.props.editCartItem(item, index);
+    }
+
     render() { 
         let subTotal = 0;
         const cartItems = this.props.cart.map((item, index) => {
@@ -16,7 +20,7 @@ class Cart extends Component {
                     <h3>{item.name}</h3>
                     <p>Qty {item.quantity}</p>
                     <p>${item.currentPrice}</p>
-                    <Button text="Edit" buttonClick={() => alert('Edit isn\'t set up yet')} />
+                    <Button text="Edit" buttonClick={() => this.handleEditClick(item, index)} />
                     <Button text="Remove" buttonClick={() => this.handleRemoveClick(index)} />
                 </div>
             )
