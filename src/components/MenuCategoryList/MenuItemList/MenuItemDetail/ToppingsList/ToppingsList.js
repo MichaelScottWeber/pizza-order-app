@@ -3,6 +3,7 @@ import AmountSelect from '../AmountSelect/AmountSelect';
 import SplitSelect from '../SplitSelect/SplitSelect';
 // import ingredientsData from '../../../../../ingredientsData';
 import './ToppingsList.css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 class ToppingsList extends Component {
 
@@ -18,15 +19,19 @@ class ToppingsList extends Component {
                 return (
                     <div key={includedTopping.name}>
                         <h4>{includedTopping.name}</h4>
-                        <input
-                            type='checkbox'
-                            id={includedTopping.name}
-                            checked={true}
-                            onChange={() => {
-                                this.props.toppingRemove(includedTopping)
-                                this.props.updatePrice();
-                            }}
-                        />
+                        <label htmlFor={includedTopping.name}>
+                            <input
+                                className="filled-in"
+                                type='checkbox'
+                                id={includedTopping.name}
+                                checked={true}
+                                onChange={() => {
+                                    this.props.toppingRemove(includedTopping)
+                                    this.props.updatePrice();
+                                }}
+                            />
+                            <span></span>
+                        </label>
                         <SplitSelect 
                             index={index} 
                             splitSelect={this.props.toppingSplit} 
@@ -38,21 +43,26 @@ class ToppingsList extends Component {
                             amountSelect={this.props.toppingAmountSelect} 
                             index={index}
                         />
+                        <div className='divider'></div>
                     </div>
                 )
             } else {
                 return (
                     <div key={topping.type}>
                         <h4>{topping.type}</h4>
-                        <input
-                            type='checkbox'
-                            id={topping.type}
-                            checked={false}
-                            onChange={() => {
-                                this.props.toppingAdd(topping);
-                                this.props.updatePrice();
-                            }}
-                        />
+                        <label htmlFor={topping.type}>
+                            <input
+                                type='checkbox'
+                                id={topping.type}
+                                checked={false}
+                                onChange={() => {
+                                    this.props.toppingAdd(topping);
+                                    this.props.updatePrice();
+                                }}
+                            />
+                            <span></span>
+                        </label>
+                        <div className='divider'></div>
                     </div>
                 )
             }

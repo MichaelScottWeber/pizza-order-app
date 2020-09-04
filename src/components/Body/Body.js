@@ -183,12 +183,10 @@ class Body extends Component {
         this.setState({ cart: cart });
     }
 
-    // This needs to change the category also
     editCartItem = (item, index) => {
         this.props.menuData.forEach(cat => {
             cat.items.forEach(i => {
                 if (i.name === item.name) {
-                    console.log(cat.category)
                     this.setState({ category: {...cat} })
                 }
             })
@@ -218,14 +216,22 @@ class Body extends Component {
     //     currentItem[option] = selection;
     //     this.setState({ currentItem: currentItem })
     // }
+
+    cartBtnContent = () => {
+        return <span><i className="material-icons">shopping_cart</i>{this.state.cart.length}</span>
+    }
     
     render() { 
         if (this.state.view === 'MenuCategoryList') {
             return (
-                <div className="Body">
+                <div className="Body container">
                     {this.state.editing.isEditing === false ? 
                         <div className="Body-top-button-container">
-                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                            <Button 
+                                text={this.cartBtnContent()} 
+                                buttonClick={() => this.changeView('Cart')} 
+                                classNames="btn-large btn-floating"
+                            />
                         </div>
                     : ''}
                     <MenuCategoryList 
@@ -237,10 +243,14 @@ class Body extends Component {
         }
         if (this.state.view === 'MenuItemList') {
             return (
-                <div className="Body">
+                <div className="Body container">
                     {this.state.editing.isEditing === false ?
                         <div className="Body-top-button-container">
-                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                            <Button 
+                                text={this.cartBtnContent()} 
+                                buttonClick={() => this.changeView('Cart')} 
+                                classNames="btn-large btn-floating"
+                            />
                             <Button text="Back" buttonClick={() => this.changeView('MenuCategoryList')} />
                         </div>
                     : ''}
@@ -253,10 +263,14 @@ class Body extends Component {
         }
         if (this.state.view === 'MenuItemDetail') {
             return (
-                <div className="Body">
+                <div className="Body container">
                     {this.state.editing.isEditing === false ?
                         <div className="Body-top-button-container">
-                            <Button text="Cart" buttonClick={() => this.changeView('Cart')} />
+                            <Button 
+                                text={this.cartBtnContent()} 
+                                buttonClick={() => this.changeView('Cart')} 
+                                classNames="btn-large btn-floating"
+                            />
                             <Button text="Back" buttonClick={() => this.changeView('MenuItemList')} />
                         </div>
                     : ''}
@@ -290,17 +304,21 @@ class Body extends Component {
         }
         if (this.state.view === 'ItemAdded') {
             return (
-                <div className='Body'>
+                <div className='Body container'>
                     {/* <ItemAdded /> */}
                     Hurray, your item has been added to the cart!
                     <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
-                    <Button text="View Cart" buttonClick={() => this.changeView('Cart')} />
+                    <Button 
+                        text={this.cartBtnContent()} 
+                        buttonClick={() => this.changeView('Cart')} 
+                        classNames="btn-large btn-floating"
+                    />
                 </div>
             )
         }
         if (this.state.view === 'Cart') {
             return (
-                <div className='Body'>
+                <div className='Body container'>
                     <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
                     <Cart 
                         cart={this.state.cart} 
