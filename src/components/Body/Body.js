@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 
 import Button from '../Button/Button';
 import MenuCategoryList from '../MenuCategoryList/MenuCategoryList';
-import MenuItemList from '../MenuCategoryList/MenuItemList/MenuItemList';
-import MenuItemDetail from '../MenuCategoryList/MenuItemList/MenuItemDetail/MenuItemDetail';
+import MenuItemList from '../MenuItemList/MenuItemList';
+import MenuItemDetail from '../MenuItemDetail/MenuItemDetail';
 import Cart from '../Cart/Cart';
 
 import menuData from '../../menuData';
 import ingredientsData from '../../ingredientsData';
 
-import './Body.css';
+import {ReactComponent as CartIcon} from '../../img/icons/icon-shopping-cart.svg'
+import {ReactComponent as BackIcon} from '../../img/icons/icon-cheveron-left.svg'
 
 class Body extends Component {
     static defaultProps = { 
@@ -208,29 +209,44 @@ class Body extends Component {
     updateCartItem = (item, index) => {
         let cart = [...this.state.cart];
         cart.splice(index, 1, item);
-        this.setState({ cart: cart });
+        this.setState({ 
+            cart: cart,
+            editing: { isEditing: false, itemIndex: null },
+        });
     }
 
-    // optionSelect = (option, selection) => {
-    //     let currentItem = this.state.currentItem;
-    //     currentItem[option] = selection;
-    //     this.setState({ currentItem: currentItem })
+    btnContent2 = (first, second) => {
+        return (
+            <span>
+                {first}
+                {second}
+            </span>
+        )
+    }
+
+    // btnContent2 = (first, second) => {
+    //     return (
+    //         <span>
+    //             <img className="cart-icon" src={cartIcon} />
+    //             <span>{this.state.cart.length}</span>
+    //         </span>
+    //     )
     // }
-
-    cartBtnContent = () => {
-        return <span><i className="material-icons">shopping_cart</i>{this.state.cart.length}</span>
-    }
     
     render() { 
         if (this.state.view === 'MenuCategoryList') {
             return (
-                <div className="Body container">
+                <div className="Body">
                     {this.state.editing.isEditing === false ? 
-                        <div className="Body-top-button-container">
+                        <div className="button-holder">
                             <Button 
-                                text={this.cartBtnContent()} 
+                                text={this.btnContent2(
+                                    // <img className="cart-icon" src={cartIcon} />,
+                                    <CartIcon class="cart-icon" />,
+                                    <span>{this.state.cart.length}</span>
+                                )} 
                                 buttonClick={() => this.changeView('Cart')} 
-                                classNames="btn-large btn-floating"
+                                classNames="cart-btn"
                             />
                         </div>
                     : ''}
@@ -243,15 +259,26 @@ class Body extends Component {
         }
         if (this.state.view === 'MenuItemList') {
             return (
-                <div className="Body container">
+                <div className="Body">
                     {this.state.editing.isEditing === false ?
-                        <div className="Body-top-button-container">
+                        <div className="button-holder">
                             <Button 
-                                text={this.cartBtnContent()} 
+                                text={this.btnContent2(
+                                    // <img className="cart-icon" src={cartIcon} />,
+                                    <CartIcon class="cart-icon" />,
+                                    <span>{this.state.cart.length}</span>
+                                )} 
                                 buttonClick={() => this.changeView('Cart')} 
-                                classNames="btn-large btn-floating"
+                                classNames="cart-btn"
                             />
-                            <Button text="Back" buttonClick={() => this.changeView('MenuCategoryList')} />
+                            <Button 
+                                text={this.btnContent2(
+                                    // <img className="back-icon" src={backIcon} />,
+                                    <BackIcon className="back-icon" />
+                                )} 
+                                buttonClick={() => this.changeView('MenuCategoryList')} 
+                                classNames="back-btn"
+                            />
                         </div>
                     : ''}
                     <MenuItemList 
@@ -263,15 +290,26 @@ class Body extends Component {
         }
         if (this.state.view === 'MenuItemDetail') {
             return (
-                <div className="Body container">
+                <div className="Body">
                     {this.state.editing.isEditing === false ?
-                        <div className="Body-top-button-container">
+                        <div className="button-holder">
                             <Button 
-                                text={this.cartBtnContent()} 
+                                text={this.btnContent2(
+                                    // <img className="cart-icon" src={cartIcon} />,
+                                    <CartIcon class="cart-icon" />,
+                                    <span>{this.state.cart.length}</span>
+                                )} 
                                 buttonClick={() => this.changeView('Cart')} 
-                                classNames="btn-large btn-floating"
+                                classNames="cart-btn"
                             />
-                            <Button text="Back" buttonClick={() => this.changeView('MenuItemList')} />
+                            <Button 
+                                text={this.btnContent2(
+                                    // <img className="back-icon" src={backIcon} />,
+                                    <BackIcon className="back-icon" />
+                                )}
+                                buttonClick={() => this.changeView('MenuItemList')} 
+                                classNames="back-btn"
+                            />
                         </div>
                     : ''}
                     <MenuItemDetail 
@@ -304,21 +342,22 @@ class Body extends Component {
         }
         if (this.state.view === 'ItemAdded') {
             return (
-                <div className='Body container'>
+                <div className='Body'>
                     {/* <ItemAdded /> */}
-                    Hurray, your item has been added to the cart!
+                    <p>Your item has been added!</p>
+                    <p>{`Qty. ${this.state.currentItem.quantity} - ${this.state.currentItem.currentSize ? this.state.currentItem.currentSize : ''} ${this.state.currentItem.name}`}</p>
                     <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
                     <Button 
-                        text={this.cartBtnContent()} 
+                        text='View Cart'
                         buttonClick={() => this.changeView('Cart')} 
-                        classNames="btn-large btn-floating"
+                        classNames=""
                     />
                 </div>
             )
         }
         if (this.state.view === 'Cart') {
             return (
-                <div className='Body container'>
+                <div className='Body'>
                     <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
                     <Cart 
                         cart={this.state.cart} 

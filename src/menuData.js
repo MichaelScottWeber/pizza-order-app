@@ -1,3 +1,19 @@
+import pizzaImg1 from './img/food-images/pizza-image-1.png'
+import pizzaImg2 from './img/food-images/pizza-image-2.png'
+import pizzaImg3 from './img/food-images/pizza-image-3.png'
+import appImg1 from './img/food-images/app-image-1.png'
+import appImg2 from './img/food-images/app-image-2.png'
+import appImg3 from './img/food-images/app-image-3.png'
+import saladImg1 from './img/food-images/salad-image-1.png'
+import saladImg2 from './img/food-images/salad-image-2.png'
+import saladImg3 from './img/food-images/salad-image-3.png'
+import sandwichImg1 from './img/food-images/sandwich-image-1.png'
+import sandwichImg2 from './img/food-images/sandwich-image-2.png'
+import sandwichImg3 from './img/food-images/sandwich-image-3.png'
+import dessertImg1 from './img/food-images/dessert-image-1.png'
+import dessertImg2 from './img/food-images/dessert-image-2.png'
+import dessertImg3 from './img/food-images/dessert-image-3.png'
+
 const menuData = [
     {
         id: 1,
@@ -9,7 +25,7 @@ const menuData = [
                 id: 101,
                 name: 'Create Your Own',
                 description: 'Order your pizza just how you like it - topped with your favorite ingredients and cooked just the way you want',
-                imageUrl: 'https://images.unsplash.com/photo-1509403491765-9fb9d773ca6d?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg1,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -31,7 +47,7 @@ const menuData = [
                 id: 102,
                 name: 'Cheese',
                 description: 'Mozzarella cheese and vine-ripened tomato sauce on your choice of crust',
-                imageUrl: 'https://images.unsplash.com/photo-1583990504911-89fcd98d0c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg2,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -53,7 +69,7 @@ const menuData = [
                 id: 103,
                 name: 'Pepperoni',
                 description: 'Pepperoni slices on top of mozzarella cheese and vine-ripened tomato sauce on your choice of crust',
-                imageUrl: 'https://images.unsplash.com/photo-1591484506290-803ed645eb54?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg3,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -82,7 +98,7 @@ const menuData = [
                 id: 104,
                 name: 'Sausage',
                 description: 'Lean sausage on top of mozzarella cheese and vine-ripened tomato sauce on your choice of crust',
-                imageUrl: 'https://images.unsplash.com/photo-1590083745251-4fdb0b285c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg1,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -111,7 +127,7 @@ const menuData = [
                 id: 105,
                 name: 'Veggie',
                 description: 'Mushrooms, black olives, and green peppers on top of mozzarella cheese and vine-ripened tomato sauce on your choice of crust',
-                imageUrl: 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg2,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -152,7 +168,7 @@ const menuData = [
                 id: 106,
                 name: 'Hawaiian',
                 description: 'Pineapple and ham on top of mozzarella cheese and vine-ripened tomato sauce on your choice of crust',
-                imageUrl: 'https://images.unsplash.com/photo-1527133256227-fc3549f55332?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: pizzaImg3,
                 quantity: 1,
                 currentSize: 'large',
                 currentPrice: null,
@@ -193,22 +209,158 @@ const menuData = [
         items: [
             {
                 id: 201,
-                name: 'Mozzerella Sticks',
-                description: 'Fried mozzerella cheese, with a marinera dipping sauce.',
+                name: 'Bread Sticks',
+                description: 'Toasted and topped with seasonings. Comes with marinara dipping sauce.',
                 quantity: 1,
-                imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: appImg1,
                 currentPrice: 9.99
             },
             {
                 id: 202,
-                name: 'Boneless Wings',
-                description: 'Fried breast-meat chicken, dipped in buffalo sauce.  Comes with ranch dressing and celery sricks.',
+                name: 'Mozzerella Sticks',
+                description: 'Fried mozzerella cheese, with a marinera dipping sauce.',
                 quantity: 1,
-                imageUrl: 'https://images.unsplash.com/photo-1571162437205-8889ff2fee26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+                imageUrl: appImg2,
+                currentPrice: 9.99
+            },
+            {
+                id: 203,
+                name: 'Bruschetta',
+                description: 'Grilled bread topped with olive oil, fresh tomatoes and basil.',
+                quantity: 1,
+                imageUrl: appImg3,
+                currentPrice: 9.99
+            },
+            {
+                id: 204,
+                name: 'Boneless Wings',
+                description: 'Fried breast-meat chicken, dipped in buffalo sauce.  Comes with ranch dressing and celery sticks.',
+                quantity: 1,
+                imageUrl: appImg1,
                 currentPrice: 9.99
             },
         ]
-    }
+    },
+    {
+        id: 3,
+        category: 'Salads',
+        description: 'Made to order with garden-fresh ingredients.',
+        imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+        items: [
+            {
+                id: 301,
+                name: 'House Salad',
+                description: 'Our own signature salad, with romaine lettuce, croutons, tomatoes, cucumbers, cheddar chese and our house dressing.',
+                quantity: 1,
+                imageUrl: saladImg3,
+                currentSize: 'large',
+                currentPrice: null,
+                availableSizes: [
+                    { size: 'small', price: 6.99 },
+                    { size: 'large', price: 12.99 },
+                ],
+                specialInstructions: '',
+            },
+            {
+                id: 302,
+                name: 'Caesar Salad',
+                description: 'Romaine lettuce and croutons, topped with caesar dressing adn parmesan cheese.',
+                quantity: 1,
+                imageUrl: saladImg2,
+                currentSize: 'large',
+                currentPrice: null,
+                availableSizes: [
+                    { size: 'small', price: 6.99 },
+                    { size: 'large', price: 12.99 },
+                ],
+                specialInstructions: '',
+            },
+            // {
+            //     id: 303,
+            //     name: 'Cobb Salad',
+            //     description: 'Romaine lettuce, tomato, crisp bacon, hard-boiled egg, blue cheese, and avocado with a red-wine vinaigrette.',
+            //     quantity: 1,
+            //     imageUrl: saladImg3,
+            //     currentSize: 'large',
+            //     currentPrice: null,
+            //     availableSizes: [
+            //         { size: 'small', price: 6.99 },
+            //         { size: 'large', price: 12.99 },
+            //     ],
+            //     specialInstructions: '',
+            // },
+        ]
+    },
+    {
+        id: 4,
+        category: 'Sandwiches',
+        description: 'For when you want something hardy to eat that isn\'t pizza.',
+        imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+        items: [
+            {
+                id: 401,
+                name: 'Cheese Burger',
+                description: 'A juicy 1/3lb patty with lettuce, tomato and cheddar cheese on a brioche bun.',
+                quantity: 1,
+                imageUrl: sandwichImg1,
+                currentPrice: 9.99,
+                specialInstructions: '',
+            },
+            {
+                id: 402,
+                name: 'BLT Club',
+                description: 'Bacon, lettuce, tomato and mayo on wheat toast.',
+                quantity: 1,
+                imageUrl: sandwichImg2,
+                currentPrice: 7.99,
+                specialInstructions: '',
+            },
+            {
+                id: 403,
+                name: 'Grilled Cheese',
+                description: 'A blend of cheddar and mozzarella cheese, melted between two slices of italian bread.',
+                quantity: 1,
+                imageUrl: sandwichImg3,
+                currentPrice: 6.99,
+                specialInstructions: '',
+            },
+        ]
+    },
+    {
+        id: 5,
+        category: 'Desserts',
+        description: 'A delicious post-dinner treat.',
+        imageUrl: 'https://images.unsplash.com/photo-1548340748-6d2b7d7da280?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60',
+        items: [
+            {
+                id: 501,
+                name: 'Chocolate Cupcake',
+                description: 'Fresh from the bakery, with tons of frosting!',
+                quantity: 1,
+                imageUrl: dessertImg1,
+                currentPrice: 3.99,
+                specialInstructions: '',
+            },
+            {
+                id: 502,
+                name: 'Tiramisu',
+                description: 'Our delicious take on the classic coffee-flavored cake.',
+                quantity: 1,
+                imageUrl: dessertImg2,
+                currentPrice: 7.99,
+                specialInstructions: '',
+            },
+            {
+                id: 503,
+                name: 'Brownie Sundae',
+                description: 'Rich vanilla bean ice cream on a warm chocolate brownie, topped with fudge and a cherry',
+                quantity: 1,
+                imageUrl: dessertImg3,
+                currentPrice: 7.99,
+                specialInstructions: '',
+            },
+        ]
+    },
 ]
 
 export default menuData;

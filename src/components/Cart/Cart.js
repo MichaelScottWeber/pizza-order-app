@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Button from '../Button/Button';
+import CartItem from './CartItem/CartItem';
 
 class Cart extends Component {
     handleRemoveClick = (index) => {
@@ -12,19 +12,35 @@ class Cart extends Component {
 
     render() { 
         let subTotal = 0;
+
         const cartItems = this.props.cart.map((item, index) => {
+            // subTotal += item.currentPrice;
+            // return (
+            //     <div key={item.name}>
+            //         <img src={item.imgUrl} />
+            //         <h3>{item.name}</h3>
+            //         <p>Qty {item.quantity}</p>
+            //         <div onClick={}>
+            //             Details
+            //         </div>
+            //         <p>${item.currentPrice}</p>
+            //         <Button text="Edit" buttonClick={() => this.handleEditClick(item, index)} />
+            //         <Button text="Remove" buttonClick={() => this.handleRemoveClick(index)} />
+            //     </div>
+            // )
+
             subTotal += item.currentPrice;
             return (
-                <div key={item.name}>
-                    <img src={item.imgUrl} />
-                    <h3>{item.name}</h3>
-                    <p>Qty {item.quantity}</p>
-                    <p>${item.currentPrice}</p>
-                    <Button text="Edit" buttonClick={() => this.handleEditClick(item, index)} />
-                    <Button text="Remove" buttonClick={() => this.handleRemoveClick(index)} />
-                </div>
+                <CartItem 
+                    key={item.name}
+                    item={item} 
+                    index={index} 
+                    removeFromCart={this.props.removeFromCart} 
+                    editCartItem={this.props.editCartItem} 
+                />
             )
         })
+
         return (  
             <div className='Cart'>
                 <h2>Cart</h2>

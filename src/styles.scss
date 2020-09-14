@@ -1,0 +1,241 @@
+
+// ==================
+// ===== Colors =====
+// ==================
+
+// Primary
+$orange900: #4D2E00;
+$orange800: #663E00;
+$orange700: #995D00;
+$orange600: #D98400;
+$orange500: #FF9800;
+$orange400: #FFBC4C;
+$orange300: #FFDA9B;
+$orange200: #FFEED3;
+$orange100: #FFF7EC;
+
+// Neutral
+$grey900: #253036;
+$grey800: #4A5155;
+$grey700: #758188;
+$grey600: #8F9AA1;
+$grey500: #A4ACB0;
+$grey400: #BCC2C6;
+$grey300: #D5DADD;
+$grey200: #E8ECEE;
+$grey100: #F3F6F8;
+
+$white: #FBFBFB;
+
+// Accents
+$green900: #003C36;
+$green800: #005149;
+$green700: #006258;
+$green600: #007D71;
+$green500: #009688;
+$green400: #06C2AF;
+$green300: #75E7DC;
+$green200: #BFF7F2;
+$green100: #E6FFFC;
+
+$yellow900: #3E3700;
+$yellow800: #6B5F00;
+$yellow700: #A69500;
+$yellow600: #DFC800;
+$yellow500: #FFEB3B;
+$yellow400: #FFF174;
+$yellow300: #FFF59D;
+$yellow200: #FFF8BD;
+$yellow100: #FFFBD9;
+
+$red900: #350603;
+$red800: #4D0701;
+$red700: #730C04;
+$red600: #B61307;
+$red500: #F44336;
+$red400: #F76D63;
+$red300: #F99992;
+$red200: #FCC8C5;
+$red100: #FEF0EF;
+
+// =====================
+// ===== Font Size =====
+// =====================
+
+$fontSize1: .75rem; // 12px
+$fontSize2: .875rem; // 14px
+$fontSize3: 1rem; // 16px
+$fontSize4: 1.125rem; // 18px
+$fontSize5: 1.25rem; // 20px
+$fontSize6: 1.5rem; // 24px
+$fontSize7: 1.875rem; // 30px
+$fontSize8: 2.25rem; // 36px
+$fontSize9: 3rem; // 48px
+$fontSize10: 3.75rem; // 60px
+$fontSize11: 4.5rem; // 72px
+
+// ==========================
+// ===== Spacing/Sizing =====
+// ==========================
+
+$size1: 4px;
+$size2: 8px;
+$size3: 12px;
+$size4: 16px;
+$size5: 24px;
+$size6: 32px;
+$size7: 48px;
+$size8: 64px;
+$size9: 96px;
+$size10: 128px;
+$size11: 192px;
+$size12: 256px;
+$size13: 384px;
+$size14: 512px;
+$size15: 640px;
+$size16: 768px;
+
+
+// ========================
+// ===== Global Reset =====
+// ========================
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+    &:hover {
+        cursor: pointer;
+        color: $orange500;
+    }
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+h2 {
+    font-size: $fontSize7;
+    margin-top: $size6;
+    margin-bottom: $size6;
+}
+
+// =========================
+// ===== Button Styles =====
+// =========================
+
+@mixin default-btn {
+    width: $size8;
+    height: $size6;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1.5px solid $grey800;
+    background: none;
+    text-decoration: none;
+    font-family: 'Lato', sans-serif;
+    color: $grey900;
+    cursor: pointer;
+}
+
+// .back-btn {
+//     @include default-btn;
+//     font-size: $fontSize4;
+//     &:hover {
+
+//     }
+// }
+
+.cart-btn, .back-btn {
+    @include default-btn;
+    &:hover {
+        color: $white;
+        background-color: $orange500;
+        fill: $white;
+    }
+    span {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+    span {
+        font-size: $fontSize4;
+    }
+}
+
+.back-icon {
+    height: $fontSize5;
+}
+
+.cart-icon {
+    height: $fontSize5;
+}
+
+// ====================
+// ===== Full App =====
+// ====================
+
+.App {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// ================
+// ===== Body =====
+// ================
+
+.Body {
+    height: 100vh;
+    width: 100vw;
+    padding: $size6;
+    overflow-y: auto;
+    background-color: $white;
+
+    .button-holder {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        margin-bottom: $size6;
+        width: 100%;
+    }
+}
+
+// ============================
+// ===== MenuCategoryList =====
+// ============================
+
+.MenuCategoryList {
+    text-align: center;
+    margin-top: auto;
+
+    li {
+        &:not(:last-child) {
+            border-bottom: 1.5px solid $grey400;
+        }
+        a h2 {
+            display: inline-block;
+        }
+    }
+}
+
+// ========================
+// ===== MenuItemList =====
+// ========================
+
+.MenuItemList {
+
+}

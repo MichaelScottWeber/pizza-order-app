@@ -1,0 +1,22 @@
+import React, { Component } from 'react';
+
+class SpecialInstructions extends Component {
+
+    handleChange = (e) => {
+        this.props.recieveSpecialInstructions(e)
+    }
+
+    render() { 
+        return (  
+            <div className='SpecialInstructions'>
+                <label>Special Instructions</label>
+                <textarea 
+                    value={this.props.currentItem.specialInstructions}
+                    onChange={this.handleChange}
+                />
+            </div>
+        );
+    }
+}
+ 
+export default SpecialInstructions;
