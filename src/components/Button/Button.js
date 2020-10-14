@@ -8,7 +8,13 @@ class Button extends Component {
 
     render() { 
         return (
-            <button className={this.props.classNames} onClick={this.handleClick}>{this.props.text}</button>
+            <button 
+                className={this.props.classNames} 
+                onClick={this.handleClick}
+                disabled={this.props.disabled}
+            >
+                {this.props.text}
+            </button>
         );
     }
 }

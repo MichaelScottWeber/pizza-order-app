@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import AmountSelect from '../AmountSelect/AmountSelect';
 import SplitSelect from '../SplitSelect/SplitSelect';
+import { ReactComponent as Checked } from '../../img/icons/icon-checked.svg';
+import { ReactComponent as Unchecked } from '../../img/icons/icon-unchecked.svg';
+
 
 class ToppingsList extends Component {
 
@@ -14,26 +17,28 @@ class ToppingsList extends Component {
                 const index = this.props.currentItem.ingredients.toppings.indexOf(includedTopping)
 
                 return (
-                    <div key={includedTopping.name}>
-                        <h4>{includedTopping.name}</h4>
-                        <label htmlFor={includedTopping.name}>
-                            <input
-                                className="filled-in"
-                                type='checkbox'
-                                id={includedTopping.name}
-                                checked={true}
-                                onChange={() => {
-                                    this.props.toppingRemove(includedTopping)
-                                    this.props.updatePrice();
-                                }}
-                            />
-                            <span></span>
-                        </label>
-                        <SplitSelect 
-                            index={index} 
-                            splitSelect={this.props.toppingSplit} 
-                            path={this.props.currentItem.ingredients.toppings[index]}
+                    <div className="topping selected" key={includedTopping.name}>
+                        <input
+                            className="filled-in"
+                            type='checkbox'
+                            id={includedTopping.name}
+                            checked={true}
+                            onChange={() => {
+                                this.props.toppingRemove(includedTopping)
+                                this.props.updatePrice();
+                            }}
                         />
+                        <div className="label-split-container">
+                            <label className="topping-label" htmlFor={includedTopping.name}>
+                                <h5>{includedTopping.name}</h5>
+                                <Checked />
+                            </label>
+                            <SplitSelect 
+                                index={index} 
+                                splitSelect={this.props.toppingSplit} 
+                                path={this.props.currentItem.ingredients.toppings[index]}
+                            />
+                        </div>
                         <AmountSelect 
                             name={includedTopping.name} 
                             currentAmount={includedTopping.amount} 
@@ -45,19 +50,21 @@ class ToppingsList extends Component {
                 )
             } else {
                 return (
-                    <div key={topping.type}>
-                        <h4>{topping.type}</h4>
+                    <div className="topping" key={topping.type}>
+                        <input
+                            type='checkbox'
+                            id={topping.type}
+                            checked={false}
+                            onChange={() => {
+                                this.props.toppingAdd(topping);
+                                this.props.updatePrice();
+                            }}
+                        />
                         <label htmlFor={topping.type}>
-                            <input
-                                type='checkbox'
-                                id={topping.type}
-                                checked={false}
-                                onChange={() => {
-                                    this.props.toppingAdd(topping);
-                                    this.props.updatePrice();
-                                }}
-                            />
-                            <span></span>
+                            <span className="topping-label">
+                                <h5>{topping.type}</h5>
+                                <Unchecked />
+                            </span>
                         </label>
                         <div className='divider'></div>
                     </div>
@@ -67,7 +74,7 @@ class ToppingsList extends Component {
 
         return (  
             <div className='ToppingsList'>
-                <h3>Toppings</h3>
+                <h4>Toppings</h4>
                 {allToppings}
             </div>
         );

@@ -23,6 +23,7 @@ class MenuItemList extends Component {
         return (
             <div className="MenuItemList">
                 <h2>{this.props.category.category}</h2>
+                <p>{this.props.category.description}</p>
                 <ul>
                     {this.itemList}
                 </ul>

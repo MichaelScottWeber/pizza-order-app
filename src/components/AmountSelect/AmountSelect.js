@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import './AmountSelect.css';
 
 class AmountSelect extends Component {
 
-    handleChange = (e) => {
+    handleClick = (e) => {
         this.props.amountSelect(e, this.props.index)
     };
 
@@ -14,15 +13,21 @@ class AmountSelect extends Component {
             return (
                 <div key={amount}>
                     <input 
-                    name={this.props.name}
-                    id={amount}
-                    type='checkbox'
-                    onChange={() => {
-                        this.handleChange(amount);
-                    }}
-                    checked={this.props.currentAmount === amount}
+                        name={this.props.name}
+                        id={amount}
+                        type='checkbox'
+                        readOnly
+                        checked={this.props.currentAmount === amount}
                     />
-                    <label htmlFor={amount}>{amount}</label>
+                    <label 
+                        className={this.props.currentAmount === amount ? 'selected' : ''} 
+                        onClick={() => {
+                            this.handleClick(amount);
+                        }}
+                        htmlFor={amount}
+                    >
+                        {amount}
+                    </label>
                 </div>
             )
         })

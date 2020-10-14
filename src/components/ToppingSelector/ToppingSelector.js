@@ -12,6 +12,7 @@ class ToppingSelector extends Component {
             return (  
                 <div className='ToppingSelector'>
                     <h4>{topping.name}</h4>
+                    <SplitSelect topping={topping} splitSelect={console.log('!!!')} />
                     <div>
                         <input 
                             type='checkbox' 
@@ -20,14 +21,13 @@ class ToppingSelector extends Component {
                             // onChange={}
                         />
                     </div>
-                    <SplitSelect topping={topping} splitSelect={console.log('!!!')} />
                     <AmountSelect name={topping.name} currentAmount={topping.amount} amountSelect={console.log('!!!')} />
                 </div>
             );
         } else {
             return (  
                 <div className='ToppingSelector'>
-                    <h4>{topping.name}</h4>
+                    <h5>{topping.name}</h5>
                     <div>
                         <input 
                             type='checkbox' 

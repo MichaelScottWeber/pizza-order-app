@@ -49,25 +49,29 @@ class SizeSelector extends Component {
     render() { 
         let sizeList = this.props.availableSizes.map((size, index) => {
             return (
-                <div key={size.size}>
-                    <button 
-                        name={size.size} 
-                        type='button' 
-                        onClick={() => {
-                            this.handleClick(size.size)
-                        }}
-                    >
+                <div 
+                    className="size-container" 
+                    key={size.size}
+                    onClick={() => {
+                        this.handleClick(size.size)
+                    }}
+                >
+                    <button name={size.size} type='button' >
                         {this.sizeIcon(size.size)}
                     </button>
-                    <p>{size.size}</p>
+                    <p className={this.props.size === size.size ? 'selected' : ''}>
+                        {size.size}
+                    </p>
                 </div>
             )
         })
 
         return (  
             <div className='SizeSelector'>
-                <h3>Size:</h3>
-                {sizeList}
+                <h4>Size:</h4>
+                <div className="control-container">
+                    {sizeList}
+                </div>
             </div>
         );
     }

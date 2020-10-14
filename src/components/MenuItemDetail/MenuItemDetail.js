@@ -59,34 +59,67 @@ class MenuItemDetail extends Component {
         return (  
             <div className="MenuItemDetail">
                 <img src={currentItem.imageUrl} alt={currentItem.imageUrl} />
-                <h2>{currentItem.name}</h2>
-                <p>{currentItem.description}</p>
+                <div className="details-container">
+                    <h3>{currentItem.name}</h3>
+                    <p>{currentItem.description}</p>
+                    <div className="underline" ></div>
 
-                <QuantitySelector 
-                    quantity={currentItem.quantity}
-                    quantityIncrease={quantityIncrease}
-                    quantityDecrease={quantityDecrease}
-                    updatePrice={updatePrice}
-                />
-
-                {currentItem.availableSizes ? <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} updatePrice={updatePrice} /> : ''}
-
-                {currentItem.ingredients ? <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} updatePrice={updatePrice} /> : ''}
-
-                {currentItem.ingredients ? <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} updatePrice={updatePrice} /> : ''}
-
-                {currentItem.ingredients ? <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> : ''}
-
-                <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
-
-                {currentItem.ingredients ? <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} /> : ''}
-
-                <div className='MenuItemDetail-add-to-order'>
-                    <Button
-                        buttonClick={this.handleUpdateOrderClick}
-                        text={editing.isEditing ? `Update item $${currentItem.currentPrice}` : `Add to order $${currentItem.currentPrice}`} 
+                    <QuantitySelector 
+                        quantity={currentItem.quantity}
+                        quantityIncrease={quantityIncrease}
+                        quantityDecrease={quantityDecrease}
+                        updatePrice={updatePrice}
                     />
-                    {editing.isEditing ? <Button buttonClick={this.handleCancelClick} text='Cancel' /> : ''}
+                    <div className="underline" ></div>
+
+                    {currentItem.availableSizes 
+                        ? <div>
+                            <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} updatePrice={updatePrice} />
+                            <div className="underline" ></div>
+                        </div>
+                        : ''
+                    }
+
+                    {currentItem.ingredients 
+                        ? <div>
+                            <CrustSelector crust={currentItem.ingredients.crust} crustSelect={crustSelect} updatePrice={updatePrice} />
+                            <div className="underline" ></div>
+                        </div>
+                        : ''
+                    }
+
+                    {currentItem.ingredients 
+                        ? <div>
+                            <SauceSelector sauce={currentItem.ingredients.sauce} sauceTypeSelect={sauceTypeSelect} sauceAmountSelect={sauceAmountSelect} updatePrice={updatePrice} /> 
+                            <div className="underline" ></div>
+                        </div>
+                        : ''
+                    }
+
+                    {currentItem.ingredients 
+                        ? <div>
+                            <CheeseSelector cheese={currentItem.ingredients.cheese} cheeseInclude={cheeseInclude} cheeseSplit={cheeseSplit} cheeseAmountSelect={cheeseAmountSelect} /> 
+                            <div className="underline" ></div>
+                        </div>
+                        : ''
+                    }
+
+                    <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
+
+                    {currentItem.ingredients 
+                        ? <div>
+                            <div className="underline" ></div>
+                            <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} />
+                        </div> 
+                        : ''}
+
+                    <div className='MenuItemDetail-add-to-order'>
+                        <Button
+                            buttonClick={this.handleUpdateOrderClick}
+                            text={editing.isEditing ? `Update item - $${currentItem.currentPrice}` : `Add to order - $${currentItem.currentPrice}`} 
+                        />
+                        {editing.isEditing ? <Button classNames='cancel-btn' buttonClick={this.handleCancelClick} text='X' /> : ''}
+                    </div>
                 </div>
             </div>
         );

@@ -41,25 +41,29 @@ class CrustSelector extends Component {
     render() { 
         let crustList = ingredientsData.crust.map((crust, index) => {
             return (
-                <div key={crust.type}>
-                    <button
-                        name={crust.type}
-                        type='button'
-                        onClick={() => {
-                            this.handleClick(crust.type)
-                        }}
-                    >
+                <div 
+                    className="crust-container" 
+                    key={crust.type}
+                    onClick={() => {
+                        this.handleClick(crust.type)
+                    }}
+                >
+                    <button name={crust.type} type='button'>
                         {this.crustIcon(crust.type)}
                     </button>
-                    <p>{crust.type}</p>
+                    <p className={this.props.crust === crust.type ? 'selected' : ''}>
+                        {crust.type}
+                    </p>
                 </div>
             )
         })
 
         return (  
             <div className='CrustSelector'>
-                <h3>Crust:</h3>
-                {crustList}
+                <h4>Crust:</h4>
+                <div className="control-container">
+                    {crustList}
+                </div>
             </div>
         );
     }

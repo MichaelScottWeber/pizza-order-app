@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem/CartItem';
+import Button from '../Button/Button';
 
 class Cart extends Component {
     handleRemoveClick = (index) => {
@@ -14,20 +15,6 @@ class Cart extends Component {
         let subTotal = 0;
 
         const cartItems = this.props.cart.map((item, index) => {
-            // subTotal += item.currentPrice;
-            // return (
-            //     <div key={item.name}>
-            //         <img src={item.imgUrl} />
-            //         <h3>{item.name}</h3>
-            //         <p>Qty {item.quantity}</p>
-            //         <div onClick={}>
-            //             Details
-            //         </div>
-            //         <p>${item.currentPrice}</p>
-            //         <Button text="Edit" buttonClick={() => this.handleEditClick(item, index)} />
-            //         <Button text="Remove" buttonClick={() => this.handleRemoveClick(index)} />
-            //     </div>
-            // )
 
             subTotal += item.currentPrice;
             return (
@@ -45,7 +32,16 @@ class Cart extends Component {
             <div className='Cart'>
                 <h2>Cart</h2>
                 {cartItems}
-                <p>Subtotal: ${subTotal}</p>
+                <div className='subtotal'>
+                    <span>Subtotal</span> 
+                    <span>${subTotal}</span>
+                </div>
+                <Button 
+                    text="Confirm Order" 
+                    buttonClick={() => alert("Thanks for playing Mike's Pizza App :)")} 
+                    classNames={this.props.cart.length === 0 ? "confirm-order-btn disabled" : "confirm-order-btn"}
+                    disabled={this.props.cart.length === 0 ? "disabled" : ""}
+                />
             </div>
         );
     }

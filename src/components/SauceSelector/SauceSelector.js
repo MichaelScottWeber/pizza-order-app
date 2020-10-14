@@ -22,16 +22,25 @@ class SauceSelector extends Component {
                         }}
                         checked={this.props.sauce.type === sauce.type}
                     />
-                    <label htmlFor={sauce.type}>{sauce.type}</label>
+                    <label 
+                        className={this.props.sauce.type === sauce.type ? 'selected' : ''} 
+                        htmlFor={sauce.type}
+                    >
+                        {sauce.type}
+                    </label>
                 </div>
             )
         })
 
         return (  
             <div className='SauceSelector'>
-                <h3>Sauce:</h3>
+                <h4>Sauce:</h4>
                 <div className='SauceSelector-type'>{sauceList}</div>
-                <AmountSelect name='sauce-amount' currentAmount={this.props.sauce.amount} amountSelect={this.props.sauceAmountSelect} />
+                <AmountSelect 
+                    name='sauce-amount' 
+                    currentAmount={this.props.sauce.amount} 
+                    amountSelect={this.props.sauceAmountSelect} 
+                />
             </div>
         );
     }

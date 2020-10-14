@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import MenuCategoryList from '../MenuCategoryList/MenuCategoryList';
 import MenuItemList from '../MenuItemList/MenuItemList';
 import MenuItemDetail from '../MenuItemDetail/MenuItemDetail';
+import ItemAdded from '../ItemAdded/ItemAdded';
 import Cart from '../Cart/Cart';
 
 import menuData from '../../menuData';
@@ -13,9 +14,10 @@ import {ReactComponent as CartIcon} from '../../img/icons/icon-shopping-cart.svg
 import {ReactComponent as BackIcon} from '../../img/icons/icon-cheveron-left.svg'
 
 class Body extends Component {
-    static defaultProps = { 
-        menuData: [...menuData]
-    }
+    // static defaultProps = { 
+    //     menuData: menuData,
+    //     safeMenuData: menuData,
+    // }
 
     state = {  
         view: 'MenuCategoryList',
@@ -26,20 +28,23 @@ class Body extends Component {
     }
 
     categorySelect = (cat) => {
+        const category = Object.assign({}, cat);
         this.setState({ 
             view: 'MenuItemList',
-            category: {...cat}
+            category: category,
         });
     }
 
     itemSelect = (item) => {
-        if (this.state.category.category === 'Pizzas') {
-            let index = item.availableSizes.findIndex(e => e.size === item.currentSize);
-            item.currentPrice = item.availableSizes[index].price;
+        const currentItem = Object.assign({}, item);
+        if (this.state.category.category === 'Pizzas' || this.state.category.category === 'Salads') {
+            let index = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
+            currentItem.currentPrice = currentItem.availableSizes[index].price;
         }
         this.setState({
             view: 'MenuItemDetail',
-            currentItem: {...item}
+            // currentItem: {...item}
+            currentItem: currentItem,
         })
     }
 
@@ -68,9 +73,30 @@ class Body extends Component {
     }
 
     crustSelect = (e) => {
-        const currentItem = this.state.currentItem;
-        currentItem.ingredients.crust = e;
-        this.setState({ currentItem: currentItem });
+        // const currentItem = this.state.currentItem;
+        // currentItem.ingredients.crust = e;
+        // this.setState({ currentItem: currentItem });
+
+
+        // this.setState(prevState => ({
+        //     ...prevState,
+        //     currentItem: {
+        //         ...prevState.currentItem,
+        //         ingredients: {
+        //             ...prevState.currentItem.ingredients, 
+        //             crust: e
+        //         }
+        //     }
+        // }))
+
+
+        this.setState({
+            currentItem: {
+                ...this.state.currentItem, ingredients: {
+                    ...this.state.currentItem.ingredients, crust: e
+                }
+            }
+        })
     }
 
     sauceTypeSelect = (e) => {
@@ -162,13 +188,16 @@ class Body extends Component {
             })
 
             newPrice = currentItem.availableSizes[sizeIndex].price + crustPrice + saucePrice + toppingsPrice;
+        } else if (this.state.category.category === 'Salads') {
+            const sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
+            newPrice = currentItem.availableSizes[sizeIndex].price
         } else {
             const itemIndex = this.state.category.items.findIndex(e => e.name === currentItem.name);
 
             newPrice = this.state.category.items[itemIndex].currentPrice;
         }
 
-        currentItem.currentPrice = newPrice * currentItem.quantity;
+        currentItem.currentPrice = parseFloat((newPrice * currentItem.quantity).toFixed(2));
 
         this.setState({ currentItem: currentItem });
     }
@@ -185,7 +214,7 @@ class Body extends Component {
     }
 
     editCartItem = (item, index) => {
-        this.props.menuData.forEach(cat => {
+        menuData.forEach(cat => {
             cat.items.forEach(i => {
                 if (i.name === item.name) {
                     this.setState({ category: {...cat} })
@@ -215,6 +244,14 @@ class Body extends Component {
         });
     }
 
+    continueShopping = () => {
+        this.changeView('MenuCategoryList');
+        this.setState({
+            category: null,
+            currentItem: null,
+        })
+    }
+
     btnContent2 = (first, second) => {
         return (
             <span>
@@ -223,147 +260,144 @@ class Body extends Component {
             </span>
         )
     }
-
-    // btnContent2 = (first, second) => {
-    //     return (
-    //         <span>
-    //             <img className="cart-icon" src={cartIcon} />
-    //             <span>{this.state.cart.length}</span>
-    //         </span>
-    //     )
-    // }
     
     render() { 
         if (this.state.view === 'MenuCategoryList') {
             return (
                 <div className="Body">
-                    {this.state.editing.isEditing === false ? 
-                        <div className="button-holder">
-                            <Button 
-                                text={this.btnContent2(
-                                    // <img className="cart-icon" src={cartIcon} />,
-                                    <CartIcon class="cart-icon" />,
-                                    <span>{this.state.cart.length}</span>
-                                )} 
-                                buttonClick={() => this.changeView('Cart')} 
-                                classNames="cart-btn"
-                            />
-                        </div>
-                    : ''}
-                    <MenuCategoryList 
-                        menuData={this.props.menuData} 
-                        categorySelect={this.categorySelect} 
-                    />
+                    <div className="MenuCategoryList-container">
+                        {this.state.editing.isEditing === false ? 
+                            <div className="button-holder">
+                                <Button 
+                                    text={this.btnContent2(
+                                        // <img className="cart-icon" src={cartIcon} />,
+                                        <CartIcon className="cart-icon" />,
+                                        <span>{this.state.cart.length}</span>
+                                    )} 
+                                    buttonClick={() => this.changeView('Cart')} 
+                                    classNames="cart-btn"
+                                />
+                            </div>
+                        : ''}
+                        <MenuCategoryList 
+                            menuData={[...menuData]} 
+                            categorySelect={this.categorySelect} 
+                        />
+                    </div>
                 </div>
             );
         }
         if (this.state.view === 'MenuItemList') {
             return (
                 <div className="Body">
-                    {this.state.editing.isEditing === false ?
-                        <div className="button-holder">
-                            <Button 
-                                text={this.btnContent2(
-                                    // <img className="cart-icon" src={cartIcon} />,
-                                    <CartIcon class="cart-icon" />,
-                                    <span>{this.state.cart.length}</span>
-                                )} 
-                                buttonClick={() => this.changeView('Cart')} 
-                                classNames="cart-btn"
-                            />
-                            <Button 
-                                text={this.btnContent2(
-                                    // <img className="back-icon" src={backIcon} />,
-                                    <BackIcon className="back-icon" />
-                                )} 
-                                buttonClick={() => this.changeView('MenuCategoryList')} 
-                                classNames="back-btn"
-                            />
-                        </div>
-                    : ''}
-                    <MenuItemList 
-                        category={this.state.category} 
-                        itemSelect={this.itemSelect} 
-                    />
+                    <div className="MenuItemList-container">
+                        {this.state.editing.isEditing === false ?
+                            <div className="button-holder">
+                                <Button 
+                                    text={this.btnContent2(
+                                        // <img className="cart-icon" src={cartIcon} />,
+                                        <CartIcon className="cart-icon" />,
+                                        <span>{this.state.cart.length}</span>
+                                    )} 
+                                    buttonClick={() => this.changeView('Cart')} 
+                                    classNames="cart-btn"
+                                />
+                                <Button 
+                                    text={this.btnContent2(
+                                        // <img className="back-icon" src={backIcon} />,
+                                        <BackIcon className="back-icon" />
+                                    )} 
+                                    buttonClick={() => this.changeView('MenuCategoryList')} 
+                                    classNames="back-btn"
+                                />
+                            </div>
+                        : ''}
+                        <MenuItemList 
+                            category={this.state.category} 
+                            itemSelect={this.itemSelect} 
+                        />
+                    </div>
                 </div>
             )
         }
         if (this.state.view === 'MenuItemDetail') {
             return (
                 <div className="Body">
-                    {this.state.editing.isEditing === false ?
-                        <div className="button-holder">
-                            <Button 
-                                text={this.btnContent2(
-                                    // <img className="cart-icon" src={cartIcon} />,
-                                    <CartIcon class="cart-icon" />,
-                                    <span>{this.state.cart.length}</span>
-                                )} 
-                                buttonClick={() => this.changeView('Cart')} 
-                                classNames="cart-btn"
-                            />
-                            <Button 
-                                text={this.btnContent2(
-                                    // <img className="back-icon" src={backIcon} />,
-                                    <BackIcon className="back-icon" />
-                                )}
-                                buttonClick={() => this.changeView('MenuItemList')} 
-                                classNames="back-btn"
-                            />
-                        </div>
-                    : ''}
-                    <MenuItemDetail 
-                        category={this.state.category}
-                        currentItem={this.state.currentItem} 
-                        quantityIncrease={this.quantityIncrease}
-                        quantityDecrease={this.quantityDecrease}
-                        sizeSelect={this.sizeSelect}
-                        crustSelect={this.crustSelect}
-                        sauceTypeSelect={this.sauceTypeSelect}
-                        sauceAmountSelect={this.sauceAmountSelect}
-                        cheeseInclude={this.cheeseInclude}
-                        cheeseSplit={this.cheeseSplit}
-                        cheeseAmountSelect={this.cheeseAmountSelect}
-                        toppingAdd={this.toppingAdd}
-                        toppingRemove={this.toppingRemove}
-                        toppingSplit={this.toppingSplit}
-                        toppingAmountSelect={this.toppingAmountSelect}
-                        recieveSpecialInstructions={this.recieveSpecialInstructions}
-                        updatePrice={this.updatePrice}
-                        ingredientsData={ingredientsData}
-                        addToCart={this.addToCart}
-                        changeView={this.changeView}
-                        editing={this.state.editing}
-                        cancelEdit={this.cancelEdit}
-                        updateCartItem={this.updateCartItem}
-                    />
+                    <div className="MenuItemDetail-container">
+                        {this.state.editing.isEditing === false ?
+                            <div className="button-holder">
+                                <Button 
+                                    text={this.btnContent2(
+                                        // <img className="cart-icon" src={cartIcon} />,
+                                        <CartIcon className="cart-icon" />,
+                                        <span>{this.state.cart.length}</span>
+                                    )} 
+                                    buttonClick={() => this.changeView('Cart')} 
+                                    classNames="cart-btn"
+                                />
+                                <Button 
+                                    text={this.btnContent2(
+                                        // <img className="back-icon" src={backIcon} />,
+                                        <BackIcon className="back-icon" />
+                                    )}
+                                    buttonClick={() => this.changeView('MenuItemList')} 
+                                    classNames="back-btn"
+                                />
+                            </div>
+                        : ''}
+                        <MenuItemDetail 
+                            category={this.state.category}
+                            currentItem={this.state.currentItem} 
+                            quantityIncrease={this.quantityIncrease}
+                            quantityDecrease={this.quantityDecrease}
+                            sizeSelect={this.sizeSelect}
+                            crustSelect={this.crustSelect}
+                            sauceTypeSelect={this.sauceTypeSelect}
+                            sauceAmountSelect={this.sauceAmountSelect}
+                            cheeseInclude={this.cheeseInclude}
+                            cheeseSplit={this.cheeseSplit}
+                            cheeseAmountSelect={this.cheeseAmountSelect}
+                            toppingAdd={this.toppingAdd}
+                            toppingRemove={this.toppingRemove}
+                            toppingSplit={this.toppingSplit}
+                            toppingAmountSelect={this.toppingAmountSelect}
+                            recieveSpecialInstructions={this.recieveSpecialInstructions}
+                            updatePrice={this.updatePrice}
+                            ingredientsData={ingredientsData}
+                            addToCart={this.addToCart}
+                            changeView={this.changeView}
+                            editing={this.state.editing}
+                            cancelEdit={this.cancelEdit}
+                            updateCartItem={this.updateCartItem}
+                        />
+                    </div>
                 </div>
             )
         }
         if (this.state.view === 'ItemAdded') {
             return (
                 <div className='Body'>
-                    {/* <ItemAdded /> */}
-                    <p>Your item has been added!</p>
-                    <p>{`Qty. ${this.state.currentItem.quantity} - ${this.state.currentItem.currentSize ? this.state.currentItem.currentSize : ''} ${this.state.currentItem.name}`}</p>
-                    <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
-                    <Button 
-                        text='View Cart'
-                        buttonClick={() => this.changeView('Cart')} 
-                        classNames=""
-                    />
+                    <div className="ItemAdded-container">
+                        <ItemAdded currentItem={this.state.currentItem} changeView={this.changeView} />
+                    </div>
                 </div>
             )
         }
         if (this.state.view === 'Cart') {
             return (
                 <div className='Body'>
-                    <Button text="Continue Shopping" buttonClick={() => this.changeView('MenuCategoryList')} />
-                    <Cart 
-                        cart={this.state.cart} 
-                        removeFromCart={this.removeFromCart} 
-                        editCartItem={this.editCartItem}
-                    />
+                    <div className="Cart-container">
+                        <Button 
+                            text="Keep Shopping" 
+                            buttonClick={this.continueShopping} 
+                            classNames="keep-shopping-btn"
+                        />
+                        <Cart 
+                            cart={this.state.cart} 
+                            removeFromCart={this.removeFromCart} 
+                            editCartItem={this.editCartItem}
+                        />
+                    </div>
                 </div>
             )
         }
