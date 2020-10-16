@@ -16,7 +16,6 @@ import {ReactComponent as BackIcon} from '../../img/icons/icon-cheveron-left.svg
 class Body extends Component {
     // static defaultProps = { 
     //     menuData: menuData,
-    //     safeMenuData: menuData,
     // }
 
     state = {  
@@ -163,6 +162,7 @@ class Body extends Component {
 
     recieveSpecialInstructions = (e) => {
         const currentItem = this.state.currentItem;
+        // currentItem.specialInstructions = e.target.value.toUpperCase();
         currentItem.specialInstructions = e.target.value;
         this.setState({ currentItem: currentItem });
     }

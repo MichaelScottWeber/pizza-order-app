@@ -338,6 +338,12 @@ h4 {
             border: 2px solid $grey900;
             color: $grey900;
             width: $size6;
+
+            &:hover {
+                border-color: $red500;
+                color: $red500;
+                background-color: $white;
+            }
         }
     }
 }
@@ -836,6 +842,7 @@ h4 {
 
             li {
                 font-size: $fontSize1;
+                display: flex;
             }
 
             .toppings {
@@ -852,6 +859,7 @@ h4 {
         .value {
             color: $grey900;
             font-size: $fontSize1;
+            text-transform: capitalize;
         }
 
         .toppings-list {
