@@ -1,14 +1,45 @@
 import React, { Component } from 'react';
 import CartItem from './CartItem/CartItem';
 import Button from '../Button/Button';
+import LoadingScreen from '../LoadingScreen/LoadingScreen';
+
+function imagesLoaded(parentNode) {
+    const imgElements = parentNode.querySelectorAll("img");
+    for (const img of imgElements) {
+        if (!img.complete) {
+            return false;
+        }
+    }
+    return true;
+}
 
 class Cart extends Component {
+
+    state = {
+        loading: false,
+    }
+
     handleRemoveClick = (index) => {
         this.props.removeFromCart(index);
     }
 
     handleEditClick = (item, index) => {
         this.props.editCartItem(item, index);
+    }
+
+    handleStateChange = () => {
+        this.setState({
+            loading: !imagesLoaded(this.listElement),
+        })
+    }
+
+    renderLoadingScreen = () => {
+        if (!this.state.loading)  {
+            return null;
+        }
+        return (
+            <LoadingScreen />
+        )
     }
 
     render() { 
@@ -24,13 +55,15 @@ class Cart extends Component {
                     index={index} 
                     removeFromCart={this.props.removeFromCart} 
                     editCartItem={this.props.editCartItem} 
+                    imageLoad={this.handleStateChange}
                 />
             )
         })
 
         return (  
-            <div className='Cart'>
+            <div className='Cart' ref={element => {this.listElement = element}}>
                 <h2>Cart</h2>
+                {this.renderLoadingScreen()}
                 {cartItems}
                 <div className='subtotal'>
                     <span>Subtotal</span> 

@@ -6,27 +6,27 @@ import { ReactComponent as Unchecked } from '../../img/icons/icon-unchecked.svg'
 
 class CheeseSelector extends Component {
 
-    handleIncludeToggle = e => this.props.cheeseInclude(e);
+    handleIncludeToggle = e => this.props.includeCheeseSelect(e);
 
     render() { 
 
-        const { cheese } = this.props;
+        const { includeCheese, cheeseAmount, cheeseSplit } = this.props;
 
-        if (cheese.include) {
+        if (includeCheese) {
             return (  
                 <div className='CheeseSelector'>
                     <div className='top-container'>
                         <h4>Cheese</h4>
                         <SplitSelect 
-                            path={cheese} 
-                            splitSelect={this.props.cheeseSplit} 
+                            path={cheeseSplit} 
+                            splitSelect={this.props.cheeseSplitSelect} 
                         />
                     </div>
                     <div className='cheese-input'>
                         <input 
                             type='checkbox' 
                             id='cheese' 
-                            checked={cheese.include}
+                            checked={includeCheese}
                             onChange={this.handleIncludeToggle}
                         />
                         <label htmlFor='cheese'>
@@ -36,7 +36,7 @@ class CheeseSelector extends Component {
                     </div>
                     <AmountSelect 
                         name='cheese-amount' 
-                        currentAmount={cheese.amount} 
+                        currentAmount={cheeseAmount} 
                         amountSelect={this.props.cheeseAmountSelect} 
                     />
                 </div>
@@ -51,7 +51,7 @@ class CheeseSelector extends Component {
                         <input 
                             type='checkbox' 
                             id='cheese' 
-                            checked={cheese.include}
+                            checked={includeCheese}
                             onChange={this.handleIncludeToggle}
                         />
                         <label htmlFor='cheese'>

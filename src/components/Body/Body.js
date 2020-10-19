@@ -19,6 +19,7 @@ class Body extends Component {
     // }
 
     state = {  
+        menuData: [...menuData],
         view: 'MenuCategoryList',
         category: null,
         currentItem: null,
@@ -72,91 +73,85 @@ class Body extends Component {
     }
 
     crustSelect = (e) => {
-        // const currentItem = this.state.currentItem;
-        // currentItem.ingredients.crust = e;
-        // this.setState({ currentItem: currentItem });
-
-
-        // this.setState(prevState => ({
-        //     ...prevState,
-        //     currentItem: {
-        //         ...prevState.currentItem,
-        //         ingredients: {
-        //             ...prevState.currentItem.ingredients, 
-        //             crust: e
-        //         }
-        //     }
-        // }))
-
-
-        this.setState({
-            currentItem: {
-                ...this.state.currentItem, ingredients: {
-                    ...this.state.currentItem.ingredients, crust: e
-                }
-            }
-        })
+        const currentItem = this.state.currentItem;
+        currentItem.crust = e;
+        this.setState({ currentItem: currentItem });
     }
 
     sauceTypeSelect = (e) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.sauce.type = e;
-        this.setState({ currentItem: currentItem });
+        currentItem.sauceType = e;
+        this.setState({ currentItem: {...currentItem} });
     }
 
     sauceAmountSelect = (e) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.sauce.amount = e;
+        currentItem.sauceAmount = e;
         this.setState({ currentItem: currentItem });
     }
 
-    cheeseInclude = () => {
+    includeCheeseSelect = () => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.cheese.include ? currentItem.ingredients.cheese.include = false : currentItem.ingredients.cheese.include = true;
+        currentItem.includeCheese ? currentItem.includeCheese = false : currentItem.includeCheese = true;
         this.setState({ currentItem: currentItem });
     }
 
     cheeseAmountSelect = (e) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.cheese.amount = e;
+        currentItem.cheeseAmount = e;
         this.setState({ currentItem: currentItem });
     }
 
-    cheeseSplit = (split) => {
+    cheeseSplitSelect = (split) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.cheese.split = split;
+        currentItem.cheeseSplit = split;
         this.setState({ currentItem: currentItem });
     }
 
     toppingAdd = (e) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.toppings.push({
+        currentItem.toppings.push({
             name: e.type,
             split: 'whole',
             amount: 'normal',
             price: e.price
         });
         this.setState({ currentItem: currentItem });
+
+        // const currentItemToppings = this.state.currentItem.toppings;
+        // const newToppings = [...currentItemToppings].push({
+        //     name: e.type,
+        //     split: 'whole',
+        //     amount: 'normal',
+        //     price: e.price
+        // });
+        // this.setState(prevState => ({
+        //     ...prevState,
+        //     currentItem: {
+        //         ...prevState.currentItem,
+        //         toppings: newToppings
+        //     }
+        // }))
     }
 
     toppingRemove = (e) => {
         const currentItem = this.state.currentItem;
-        let index = currentItem.ingredients.toppings.indexOf(e)
+        let index = currentItem.toppings.indexOf(e)
         if (index > -1) {
-            currentItem.ingredients.toppings.splice(index, 1);
+            currentItem.toppings.splice(index, 1);
         }
         this.setState({ currentItem: currentItem });
     }
 
     toppingSplit = (split, index) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.toppings[index].split = split;
+        currentItem.toppings[index].split = split;
         this.setState({ currentItem: currentItem });
     }
 
     toppingAmountSelect = (amount, index) => {
         const currentItem = this.state.currentItem;
-        currentItem.ingredients.toppings[index].amount = amount;
+        currentItem.toppings[index].amount = amount;
         this.setState({ currentItem: currentItem });
     }
 
@@ -174,14 +169,14 @@ class Body extends Component {
         if (this.state.category.category === 'Pizzas') {
             const sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
 
-            const crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.ingredients.crust);
+            const crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.crust);
             const crustPrice = ingredientsData.crust[crustIndex].price;
 
-            const sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.ingredients.sauce.type);
+            const sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.sauceType);
             const saucePrice = ingredientsData.sauce[sauceIndex].price;
 
             let toppingsPrice = 0;
-            currentItem.ingredients.toppings.forEach(topping => {
+            currentItem.toppings.forEach(topping => {
                 if (topping.price) {
                     toppingsPrice += topping.price;
                 }
@@ -354,8 +349,8 @@ class Body extends Component {
                             crustSelect={this.crustSelect}
                             sauceTypeSelect={this.sauceTypeSelect}
                             sauceAmountSelect={this.sauceAmountSelect}
-                            cheeseInclude={this.cheeseInclude}
-                            cheeseSplit={this.cheeseSplit}
+                            includeCheeseSelect={this.includeCheeseSelect}
+                            cheeseSplitSelect={this.cheeseSplitSelect}
                             cheeseAmountSelect={this.cheeseAmountSelect}
                             toppingAdd={this.toppingAdd}
                             toppingRemove={this.toppingRemove}

@@ -11,10 +11,10 @@ class ToppingsList extends Component {
     
     render() { 
         const allToppings = this.props.ingredientsData.toppings.map((topping, index) => {
-            const includedTopping = this.props.currentItem.ingredients.toppings.find(e => e.name === topping.type)
+            const includedTopping = this.props.currentItem.toppings.find(e => e.name === topping.type)
 
             if (includedTopping) {
-                const index = this.props.currentItem.ingredients.toppings.indexOf(includedTopping)
+                const index = this.props.currentItem.toppings.indexOf(includedTopping)
 
                 return (
                     <div className="topping selected" key={includedTopping.name}>
@@ -36,7 +36,7 @@ class ToppingsList extends Component {
                             <SplitSelect 
                                 index={index} 
                                 splitSelect={this.props.toppingSplit} 
-                                path={this.props.currentItem.ingredients.toppings[index]}
+                                path={this.props.currentItem.toppings[index].split}
                             />
                         </div>
                         <AmountSelect 

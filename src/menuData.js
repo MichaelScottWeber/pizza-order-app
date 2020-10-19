@@ -36,12 +36,13 @@ const menuData = [
                     { size: 'extra-large', price: 17.99 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: []
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: []
             },
             {
                 id: 102,
@@ -58,12 +59,13 @@ const menuData = [
                     { size: 'extra-large', price: 17.99 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: []
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: []
             },
             {
                 id: 103,
@@ -80,19 +82,20 @@ const menuData = [
                     { size: 'extra-large', price: 18.49 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: [
-                        {
-                            name: 'pepperoni',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        }
-                    ]
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: [
+                    {
+                        name: 'pepperoni',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    }
+                ]
             },
             {
                 id: 104,
@@ -109,19 +112,20 @@ const menuData = [
                     { size: 'extra-large', price: 18.49 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: [
-                        {
-                            name: 'sausage',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        }
-                    ]
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: [
+                    {
+                        name: 'sausage',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    }
+                ]
             },
             {
                 id: 105,
@@ -138,31 +142,32 @@ const menuData = [
                     { size: 'extra-large', price: 18.99 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: [
-                        {
-                            name: 'mushrooms',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        },
-                        {
-                            name: 'black olives',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        },
-                        {
-                            name: 'green peppers',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        }
-                    ]
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: [
+                    {
+                        name: 'mushrooms',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    },
+                    {
+                        name: 'black olives',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    },
+                    {
+                        name: 'green peppers',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    }
+                ]
             },
             {
                 id: 106,
@@ -179,25 +184,26 @@ const menuData = [
                     { size: 'extra-large', price: 18.99 },
                 ],
                 specialInstructions: '',
-                ingredients: {
-                    crust: 'thin',
-                    sauce: { type: 'tomato', amount: 'normal' },
-                    cheese: { include: true, split: 'whole', amount: 'normal' },
-                    toppings: [
-                        {
-                            name: 'pineapple',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        },
-                        {
-                            name: 'ham',
-                            include: true,
-                            split: 'whole',
-                            amount: 'normal'
-                        }
-                    ]
-                },
+                crust: 'thin',
+                sauceType: 'tomato',
+                sauceAmount: 'normal',
+                includeCheese: true,
+                cheeseSplit: 'whole',
+                cheeseAmount: 'normal',
+                toppings: [
+                    {
+                        name: 'pineapple',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    },
+                    {
+                        name: 'ham',
+                        include: true,
+                        split: 'whole',
+                        amount: 'normal'
+                    }
+                ]
             },
         ]
     },

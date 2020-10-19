@@ -20,10 +20,10 @@ class SauceSelector extends Component {
                         onChange={() => {
                             this.handleSauceChange(sauce.type)
                         }}
-                        checked={this.props.sauce.type === sauce.type}
+                        checked={this.props.sauceType === sauce.type}
                     />
                     <label 
-                        className={this.props.sauce.type === sauce.type ? 'selected' : ''} 
+                        className={this.props.sauceType === sauce.type ? 'selected' : ''} 
                         htmlFor={sauce.type}
                     >
                         {sauce.type}
@@ -38,7 +38,7 @@ class SauceSelector extends Component {
                 <div className='SauceSelector-type'>{sauceList}</div>
                 <AmountSelect 
                     name='sauce-amount' 
-                    currentAmount={this.props.sauce.amount} 
+                    currentAmount={this.props.sauceAmount} 
                     amountSelect={this.props.sauceAmountSelect} 
                 />
             </div>

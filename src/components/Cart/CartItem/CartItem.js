@@ -35,27 +35,25 @@ class CartItem extends Component {
 
         // const crust = () => item.ingredients && item.ingredients.crust ? <li>{`Crust: ${item.ingredients.crust}`}</li> : '';
         const crust = () => {
-            if (item.ingredients && item.ingredients.crust) {
+            if (item.crust) {
                 return (
                     <li>
                         <span className='key'>Crust: </span>
-                        <span className='value'>{item.ingredients.crust}</span>
+                        <span className='value'>{item.crust}</span>
                     </li>
                 )
             }
         };
 
         const sauce = () => {
-            if (item.ingredients && item.ingredients.sauce) {
-                if (item.ingredients.sauce.type !== 'tomato' || item.ingredients.sauce.amount !== 'normal') {
+            if (item.sauceAmount) {
+                if (item.sauceType !== 'tomato' || item.sauceAmount !== 'normal') {
                     return (
                         <li>
-                            {/* {`Sauce: ${item.ingredients.sauce.amount !== 'normal' ? item.ingredients.sauce.amount : ''}
-                            ${item.ingredients.sauce.type}`} */}
                             <span className='key'>Sauce: </span>
                             <span className='value'>
-                                {item.ingredients.sauce.amount !== 'normal' ? item.ingredients.sauce.amount + ' ' : ''}
-                                {item.ingredients.sauce.type}
+                                {item.sauceAmount !== 'normal' ? item.sauceAmount + ' ' : ''}
+                                {item.sauceType}
                             </span>
                         </li>
                     )
@@ -64,8 +62,8 @@ class CartItem extends Component {
         }
 
         const cheese = () => {
-            if (item.ingredients && item.ingredients.cheese) {
-                if (!item.ingredients.cheese.include) {
+            if (item.cheeseAmount) {
+                if (!item.includeCheese) {
                     return (
                         <li>
                             <span className='key'>Cheese: </span>
@@ -73,15 +71,13 @@ class CartItem extends Component {
                         </li>
                     )
                 }
-                if (item.ingredients.cheese.amount !== 'normal' || item.ingredients.cheese.split !== 'whole') {
+                if (item.cheeseAmount !== 'normal' || item.cheeseSplit !== 'whole') {
                     return (
                         <li>
-                            {/* {`Cheese: ${item.ingredients.cheese.amount !== 'normal' ? item.ingredients.cheese.amount : ''}
-                            ${item.ingredients.cheese.split !== 'whole' ? ' on ' + item.ingredients.cheese.split + ' side' : ''}`} */}
                             <span className='key'>Cheese: </span>
                             <span className='value'>
-                                {item.ingredients.cheese.amount !== 'normal' ? item.ingredients.cheese.amount + ' ' : ''}
-                                {item.ingredients.cheese.split !== 'whole' ? ' on ' + item.ingredients.cheese.split + ' side' : ''}
+                                {item.cheeseAmount !== 'normal' ? item.cheeseAmount + ' ' : ''}
+                                {item.cheeseSplit !== 'whole' ? ' on ' + item.cheeseSplit + ' side' : ''}
                             </span>
                         </li>
                     )
@@ -102,14 +98,14 @@ class CartItem extends Component {
         };
 
         const toppings = () => {
-            if (item.ingredients && item.ingredients.toppings.length > 0) {
+            if (item.toppings && item.toppings.length > 0) {
                 return (
                     <li className='toppings'>
                         <span className='key'>{`Toppings: `}</span>
                         <ul className='value toppings-list'>
-                            {item.ingredients.toppings.map((topping, index) => {
+                            {item.toppings.map((topping, index) => {
                                 return (
-                                    <li>
+                                    <li key={topping.name}>
                                         {`${topping.amount !== 'normal' ? topping.amount : ''} ${topping.name}
                                         ${topping.split !== 'whole' ? ' on ' + topping.split : ''}`}
                                     </li>
@@ -124,7 +120,7 @@ class CartItem extends Component {
         return (  
             <div className="CartItem">
                 <div className="info-container">
-                    <img src={this.props.item.imageUrl} />
+                    <img src={this.props.item.imageUrl} onLoad={this.props.imageLoad} />
                     <div>
                         <h3>{this.props.item.name}</h3>
                         <p>Qty {this.props.item.quantity}</p>

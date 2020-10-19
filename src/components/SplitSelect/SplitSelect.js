@@ -16,13 +16,13 @@ class SplitSelect extends Component {
         return (  
             <div className='SplitSelect'>
                 <button className='SplitSelector-left' onClick={() => this.handleClick('left')}>
-                    {this.props.path.split === 'left' ? <LeftSelected /> : <Left />}
+                    {this.props.path === 'left' ? <LeftSelected /> : <Left />}
                 </button>
                 <button className='SplitSelector-whole' onClick={() => this.handleClick('whole')}>
-                    {this.props.path.split === 'whole' ? <WholeSelected /> : <Whole />}
+                    {this.props.path === 'whole' ? <WholeSelected /> : <Whole />}
                 </button>
                 <button className='SplitSelector-right' onClick={() => this.handleClick('right')}>
-                    {this.props.path.split === 'right' ? <RightSelected /> : <Right />}
+                    {this.props.path === 'right' ? <RightSelected /> : <Right />}
                 </button>
             </div>
         );
