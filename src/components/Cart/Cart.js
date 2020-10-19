@@ -64,17 +64,19 @@ class Cart extends Component {
             <div className='Cart' ref={element => {this.listElement = element}}>
                 <h2>Cart</h2>
                 {this.renderLoadingScreen()}
-                {cartItems}
-                <div className='subtotal'>
-                    <span>Subtotal</span> 
-                    <span>${subTotal}</span>
+                <div className={this.state.loading ? 'hide' : ''}>
+                    {cartItems}
+                    <div className='subtotal'>
+                        <span>Subtotal</span> 
+                        <span>${subTotal}</span>
+                    </div>
+                    <Button 
+                        text="Confirm Order" 
+                        buttonClick={() => alert("Thanks for playing Mike's Pizza App :)")} 
+                        classNames={this.props.cart.length === 0 ? "confirm-order-btn disabled" : "confirm-order-btn"}
+                        disabled={this.props.cart.length === 0 ? "disabled" : ""}
+                    />
                 </div>
-                <Button 
-                    text="Confirm Order" 
-                    buttonClick={() => alert("Thanks for playing Mike's Pizza App :)")} 
-                    classNames={this.props.cart.length === 0 ? "confirm-order-btn disabled" : "confirm-order-btn"}
-                    disabled={this.props.cart.length === 0 ? "disabled" : ""}
-                />
             </div>
         );
     }
