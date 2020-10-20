@@ -192,6 +192,7 @@ h4 {
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: $grey200;
 }
 
 .MenuCategoryList-container,
@@ -200,7 +201,8 @@ h4 {
 .ItemAdded-container,
 .Cart-container {
     height: 100vh;
-    width: 100vw;
+    // width: 100vw;
+    max-width: 375px;
     padding: $size5;
     overflow-y: auto;
     background-color: $white;
@@ -222,6 +224,7 @@ h4 {
 .Body {
     height: 100%;
     width: 100%;
+    max-width: 375px;
 
     .button-holder {
         display: flex;
@@ -754,7 +757,7 @@ h4 {
 }
 .Cart {
     height: 100%;
-    
+
     h2 {
         text-align: center;
         font-size: $fontSize7;
@@ -1010,4 +1013,24 @@ h4 {
     0%{background-position:0% 50%}
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
+}
+
+
+// ============================
+// ===== ON LARGE SCREENS =====
+// ============================
+
+.large-screen-body {
+    width: 1157px;
+    display: flex;
+
+    .MenuCategoryList-container,
+    .center-panel,
+    .Cart-container {
+        width: 375px;
+    }
+
+    .center-panel {
+        margin: 0 $size4;
+    }
 }

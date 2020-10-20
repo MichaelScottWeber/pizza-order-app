@@ -20,11 +20,21 @@ class Body extends Component {
 
     state = {  
         menuData: [...menuData],
+        // windowWidth: window.innerWidth,
         view: 'MenuCategoryList',
+        largeScreen: null,
         category: null,
         currentItem: null,
         cart: [],
         editing: { isEditing: false, itemIndex: null }
+    }
+
+    handleResize = () => {
+        if (window.innerWidth >= this.largeWindowSize) {
+            this.setState({ largeScreen: true });
+        } else {
+            this.setState({ largeScreen: false });
+        }
     }
 
     categorySelect = (cat) => {
@@ -255,9 +265,26 @@ class Body extends Component {
             </span>
         )
     }
+
+    largeWindowSize = 1157;
+
+    componentDidMount() {
+        console.log('componentDidMount')
+        if (window.innerWidth >= this.largeWindowSize) {
+            this.setState({ largeScreen: true });
+        } else {
+            this.setState({ largeScreen: false });
+        }
+        window.addEventListener("resize", this.handleResize);
+    }
+      
+    componentWillUnmount() {
+        window.addEventListener("resize", this.handleResize);
+    }
     
     render() { 
-        if (this.state.view === 'MenuCategoryList') {
+        // ON MOBILE SCREENS
+        if (!this.state.largeScreen && this.state.view === 'MenuCategoryList') {
             return (
                 <div className="Body">
                     <div className="MenuCategoryList-container">
@@ -282,7 +309,7 @@ class Body extends Component {
                 </div>
             );
         }
-        if (this.state.view === 'MenuItemList') {
+        if (!this.state.largeScreen && this.state.view === 'MenuItemList') {
             return (
                 <div className="Body">
                     <div className="MenuItemList-container">
@@ -315,7 +342,7 @@ class Body extends Component {
                 </div>
             )
         }
-        if (this.state.view === 'MenuItemDetail') {
+        if (!this.state.largeScreen && this.state.view === 'MenuItemDetail') {
             return (
                 <div className="Body">
                     <div className="MenuItemDetail-container">
@@ -369,7 +396,7 @@ class Body extends Component {
                 </div>
             )
         }
-        if (this.state.view === 'ItemAdded') {
+        if (!this.state.largeScreen && this.state.view === 'ItemAdded') {
             return (
                 <div className='Body'>
                     <div className="ItemAdded-container">
@@ -378,7 +405,7 @@ class Body extends Component {
                 </div>
             )
         }
-        if (this.state.view === 'Cart') {
+        if (!this.state.largeScreen && this.state.view === 'Cart') {
             return (
                 <div className='Body'>
                     <div className="Cart-container">
@@ -387,6 +414,87 @@ class Body extends Component {
                             buttonClick={this.continueShopping} 
                             classNames="keep-shopping-btn"
                         />
+                        <Cart 
+                            cart={this.state.cart} 
+                            removeFromCart={this.removeFromCart} 
+                            editCartItem={this.editCartItem}
+                        />
+                    </div>
+                </div>
+            )
+        }
+
+        // ON LARGE SCREENS
+        if (this.state.largeScreen) {
+            return (
+                <div className='large-screen-body'>
+                    <div className="MenuCategoryList-container">
+                        <MenuCategoryList 
+                            menuData={[...menuData]} 
+                            categorySelect={this.categorySelect} 
+                        />
+                    </div>
+                    <div className='center-panel'>
+                        {this.state.view === 'MenuItemList' ?
+                            <div className="MenuItemList-container">
+                                <MenuItemList 
+                                    category={this.state.category} 
+                                    itemSelect={this.itemSelect} 
+                                />
+                            </div>
+                        : ''}
+                        {this.state.view === 'MenuItemDetail' ?
+                            <div className="MenuItemDetail-container">
+                                {this.state.editing.isEditing === false ?
+                                    <div className="button-holder">
+                                        <Button 
+                                            text={this.btnContent2(
+                                                // <img className="back-icon" src={backIcon} />,
+                                                <BackIcon className="back-icon" />
+                                            )}
+                                            buttonClick={() => this.changeView('MenuItemList')} 
+                                            classNames="back-btn"
+                                        />
+                                    </div>
+                                : ''}
+                                <MenuItemDetail 
+                                    category={this.state.category}
+                                    currentItem={this.state.currentItem} 
+                                    quantityIncrease={this.quantityIncrease}
+                                    quantityDecrease={this.quantityDecrease}
+                                    sizeSelect={this.sizeSelect}
+                                    crustSelect={this.crustSelect}
+                                    sauceTypeSelect={this.sauceTypeSelect}
+                                    sauceAmountSelect={this.sauceAmountSelect}
+                                    includeCheeseSelect={this.includeCheeseSelect}
+                                    cheeseSplitSelect={this.cheeseSplitSelect}
+                                    cheeseAmountSelect={this.cheeseAmountSelect}
+                                    toppingAdd={this.toppingAdd}
+                                    toppingRemove={this.toppingRemove}
+                                    toppingSplit={this.toppingSplit}
+                                    toppingAmountSelect={this.toppingAmountSelect}
+                                    recieveSpecialInstructions={this.recieveSpecialInstructions}
+                                    updatePrice={this.updatePrice}
+                                    ingredientsData={ingredientsData}
+                                    addToCart={this.addToCart}
+                                    changeView={this.changeView}
+                                    editing={this.state.editing}
+                                    cancelEdit={this.cancelEdit}
+                                    updateCartItem={this.updateCartItem}
+                                />
+                            </div>
+                        : ''}
+                        {this.state.view === 'ItemAdded' ?
+                            <div className="ItemAdded-container">
+                                <ItemAdded 
+                                    currentItem={this.state.currentItem} 
+                                    changeView={this.changeView} 
+                                    largeScreen={this.state.largeScreen}
+                                />
+                            </div>
+                        : ''}
+                    </div>
+                    <div className="Cart-container">
                         <Cart 
                             cart={this.state.cart} 
                             removeFromCart={this.removeFromCart} 
