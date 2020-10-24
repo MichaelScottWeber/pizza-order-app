@@ -266,7 +266,7 @@ class Body extends Component {
         )
     }
 
-    largeWindowSize = 1157;
+    largeWindowSize = 1125;
 
     componentDidMount() {
         console.log('componentDidMount')
@@ -492,6 +492,15 @@ class Body extends Component {
                                     largeScreen={this.state.largeScreen}
                                 />
                             </div>
+                        : ''}
+                        {this.state.view === 'MenuCategoryList' ? 
+                            <div className='empty-panel'>
+                                <p>Select a menu category from the left</p>
+                            </div>
+                        : this.state.view === 'Cart' ? 
+                        <div className='empty-panel'>
+                            <p>Select a menu category from the left</p>
+                        </div>
                         : ''}
                     </div>
                     <div className="Cart-container">

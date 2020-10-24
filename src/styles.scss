@@ -785,7 +785,7 @@ h4 {
         display: block;
         // left: 50%;
         // margin-left: -($size12/2);
-        margin: 0 auto;
+        margin: 0 auto $size4 auto;
 
         &:hover {
             background-color: $orange600;
@@ -1021,16 +1021,25 @@ h4 {
 // ============================
 
 .large-screen-body {
-    width: 1157px;
+    width: 1125px;
     display: flex;
 
     .MenuCategoryList-container,
     .center-panel,
     .Cart-container {
         width: 375px;
+        // height: 90%;
     }
 
     .center-panel {
-        margin: 0 $size4;
+        border-left: 1px solid $grey400;
+        border-right: 1px solid $grey400;
+
+        .empty-panel {
+            padding: $size4;
+            text-align: center;
+            background-color: $white;
+            height: 100%;
+        }
     }
 }
