@@ -10,9 +10,12 @@ class MenuCategoryList extends Component {
                 key={cat.id}
                 onClick={() => (this.handleClick(cat))}
             >
-                <a href='#'>
+                {/* <a href='#'>
                     <h2>{cat.category}</h2>
-                </a>
+                </a> */}
+                <button>
+                    <h2>{cat.category}</h2>
+                </button>
             </li>
         )
     })

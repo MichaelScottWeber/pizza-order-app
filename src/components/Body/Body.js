@@ -269,7 +269,6 @@ class Body extends Component {
     largeWindowSize = 1125;
 
     componentDidMount() {
-        console.log('componentDidMount')
         if (window.innerWidth >= this.largeWindowSize) {
             this.setState({ largeScreen: true });
         } else {

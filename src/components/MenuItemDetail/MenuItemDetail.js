@@ -46,7 +46,6 @@ class MenuItemDetail extends Component {
     render() { 
 
         const { 
-            category, 
             currentItem, 
             quantityIncrease, 
             quantityDecrease, 

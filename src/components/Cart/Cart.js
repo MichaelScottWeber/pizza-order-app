@@ -48,6 +48,7 @@ class Cart extends Component {
         const cartItems = this.props.cart.map((item, index) => {
 
             subTotal += item.currentPrice;
+            subTotal.toFixed(2);
             return (
                 <CartItem 
                     key={item.name}

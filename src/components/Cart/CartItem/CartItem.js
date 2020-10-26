@@ -120,7 +120,11 @@ class CartItem extends Component {
         return (  
             <div className="CartItem">
                 <div className="info-container">
-                    <img src={this.props.item.imageUrl} onLoad={this.props.imageLoad} />
+                    <img 
+                        src={this.props.item.imageUrl} 
+                        alt={this.props.item.name}
+                        onLoad={this.props.imageLoad} 
+                    />
                     <div>
                         <h3>{this.props.item.name}</h3>
                         <p>Qty {this.props.item.quantity}</p>
