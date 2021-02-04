@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 class Button extends Component {
 
-    handleClick =() => {
+    handleClick = () => {
         this.props.buttonClick();
     }
 
-    render() { 
+    render() {
         return (
-            <button 
-                className={this.props.classNames} 
+            <button
+                className={this.props.classNames}
                 onClick={this.handleClick}
                 disabled={this.props.disabled}
             >
@@ -18,5 +18,5 @@ class Button extends Component {
         );
     }
 }
- 
+
 export default Button;

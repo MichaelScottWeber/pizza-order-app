@@ -12,8 +12,8 @@ class SplitSelect extends Component {
         this.props.splitSelect(e, this.props.index)
     }
 
-    render() { 
-        return (  
+    render() {
+        return (
             <div className='SplitSelect'>
                 <button className='SplitSelector-left' onClick={() => this.handleClick('left')}>
                     {this.props.path === 'left' ? <LeftSelected /> : <Left />}
@@ -28,5 +28,5 @@ class SplitSelect extends Component {
         );
     }
 }
- 
+
 export default SplitSelect;

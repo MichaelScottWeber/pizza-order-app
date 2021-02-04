@@ -3,37 +3,34 @@ import AmountSelect from '../AmountSelect/AmountSelect';
 import SplitSelect from '../SplitSelect/SplitSelect';
 
 class ToppingSelector extends Component {
-    
-    render() { 
 
+    render() {
         const { topping, } = this.props;
 
         if (topping.include) {
-            return (  
+            return (
                 <div className='ToppingSelector'>
                     <h4>{topping.name}</h4>
                     <SplitSelect topping={topping} splitSelect={console.log('!!!')} />
                     <div>
-                        <input 
-                            type='checkbox' 
-                            id={topping.name} 
+                        <input
+                            type='checkbox'
+                            id={topping.name}
                             checked={topping.include}
-                            // onChange={}
                         />
                     </div>
                     <AmountSelect name={topping.name} currentAmount={topping.amount} amountSelect={console.log('!!!')} />
                 </div>
             );
         } else {
-            return (  
+            return (
                 <div className='ToppingSelector'>
                     <h5>{topping.name}</h5>
                     <div>
-                        <input 
-                            type='checkbox' 
-                            id={topping.name} 
+                        <input
+                            type='checkbox'
+                            id={topping.name}
                             checked={topping.include}
-                            // onChange={}
                         />
                     </div>
                 </div>
@@ -41,5 +38,5 @@ class ToppingSelector extends Component {
         }
     }
 }
- 
+
 export default ToppingSelector;

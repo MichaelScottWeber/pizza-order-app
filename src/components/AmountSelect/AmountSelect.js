@@ -6,21 +6,19 @@ class AmountSelect extends Component {
         this.props.amountSelect(e, this.props.index)
     };
 
-    render() { 
-        // const { currentAmount, } = this.props;
-
+    render() {
         let amountList = ['light', 'normal', 'extra'].map((amount, index) => {
             return (
                 <div key={amount}>
-                    <input 
+                    <input
                         name={this.props.name}
                         id={amount}
                         type='checkbox'
                         readOnly
                         checked={this.props.currentAmount === amount}
                     />
-                    <label 
-                        className={this.props.currentAmount === amount ? 'selected' : ''} 
+                    <label
+                        className={this.props.currentAmount === amount ? 'selected' : ''}
                         onClick={() => {
                             this.handleClick(amount);
                         }}
@@ -32,10 +30,10 @@ class AmountSelect extends Component {
             )
         })
 
-        return (  
+        return (
             <div className='AmountSelect'>{amountList}</div>
         );
     }
 }
- 
+
 export default AmountSelect;

@@ -34,7 +34,7 @@ class Cart extends Component {
     }
 
     renderLoadingScreen = () => {
-        if (!this.state.loading)  {
+        if (!this.state.loading) {
             return null;
         }
         return (
@@ -42,38 +42,37 @@ class Cart extends Component {
         )
     }
 
-    render() { 
+    render() {
         let subTotal = 0;
 
         const cartItems = this.props.cart.map((item, index) => {
-
             subTotal += item.currentPrice;
             subTotal.toFixed(2);
             return (
-                <CartItem 
+                <CartItem
                     key={item.name}
-                    item={item} 
-                    index={index} 
-                    removeFromCart={this.props.removeFromCart} 
-                    editCartItem={this.props.editCartItem} 
+                    item={item}
+                    index={index}
+                    removeFromCart={this.props.removeFromCart}
+                    editCartItem={this.props.editCartItem}
                     imageLoad={this.handleStateChange}
                 />
             )
         })
 
-        return (  
-            <div className='Cart' ref={element => {this.listElement = element}}>
+        return (
+            <div className='Cart' ref={element => { this.listElement = element }}>
                 <h2>Cart</h2>
                 {this.renderLoadingScreen()}
                 <div className={this.state.loading ? 'hide' : ''}>
                     {cartItems}
                     <div className='subtotal'>
-                        <span>Subtotal</span> 
+                        <span>Subtotal</span>
                         <span>${subTotal}</span>
                     </div>
-                    <Button 
-                        text="Confirm Order" 
-                        buttonClick={() => alert("Thanks for playing Mike's Pizza App :)")} 
+                    <Button
+                        text="Confirm Order"
+                        buttonClick={() => alert("Thanks for playing Mike's Pizza App :)")}
                         classNames={this.props.cart.length === 0 ? "confirm-order-btn disabled" : "confirm-order-btn"}
                         disabled={this.props.cart.length === 0 ? "disabled" : ""}
                     />
@@ -82,5 +81,5 @@ class Cart extends Component {
         );
     }
 }
- 
+
 export default Cart;

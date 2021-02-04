@@ -8,30 +8,29 @@ class ItemAdded extends Component {
 
     handleCartClick = () => this.props.changeView('Cart')
 
-    render() { 
-
-        return (  
+    render() {
+        return (
             <div className="ItemAdded">
                 <ConfirmCheck className="icon" />
                 <h2>Your item has been added!</h2>
                 <p>{`Qty. ${this.props.currentItem.quantity} - ${this.props.currentItem.currentSize ? this.props.currentItem.currentSize : ''} ${this.props.currentItem.name}`}</p>
                 {!this.props.largeScreen ?
                     <div className="btn-container">
-                        <Button 
-                            text="Keep Shopping" 
-                            buttonClick={this.handleContinueShoppingClick} 
+                        <Button
+                            text="Keep Shopping"
+                            buttonClick={this.handleContinueShoppingClick}
                             classNames="keep-shopping-btn"
                         />
-                        <Button 
-                            text="View Cart" 
-                            buttonClick={this.handleCartClick} 
+                        <Button
+                            text="View Cart"
+                            buttonClick={this.handleCartClick}
                             classNames="cart-btn"
                         />
                     </div>
-                : ''}
+                    : ''}
             </div>
         );
     }
 }
- 
+
 export default ItemAdded;

@@ -22,6 +22,7 @@ class CrustSelector extends Component {
                 return <Thin />
             }
         }
+
         if (crust === 'double-dough') {
             if (crust === this.props.crust) {
                 return <ThickSelected />
@@ -29,6 +30,7 @@ class CrustSelector extends Component {
                 return <Thick />
             }
         }
+        
         if (crust === 'deep-dish') {
             if (crust === this.props.crust) {
                 return <DeepDishSelected />
@@ -38,11 +40,11 @@ class CrustSelector extends Component {
         }
     }
 
-    render() { 
+    render() {
         let crustList = ingredientsData.crust.map((crust, index) => {
             return (
-                <div 
-                    className="crust-container" 
+                <div
+                    className="crust-container"
                     key={crust.type}
                     onClick={() => {
                         this.handleClick(crust.type)
@@ -58,7 +60,7 @@ class CrustSelector extends Component {
             )
         })
 
-        return (  
+        return (
             <div className='CrustSelector'>
                 <h4>Crust:</h4>
                 <div className="control-container">
@@ -68,5 +70,5 @@ class CrustSelector extends Component {
         );
     }
 }
- 
+
 export default CrustSelector;

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 
 class LoadingScreen extends Component {
-    render() { 
-        return (  
+    render() {
+        return (
             <div className="LoadingScreen">
-                {/* <div className="top-box"></div> */}
                 <div className="row row-1">
                     <div className="inner-row-1"></div>
                     <div className="inner-row-2"></div>
@@ -20,19 +19,9 @@ class LoadingScreen extends Component {
                     <div className="inner-row-2"></div>
                     <div className="inner-row-3"></div>
                 </div>
-                {/* <div className="row row-4">
-                    <div className="inner-row-1"></div>
-                    <div className="inner-row-2"></div>
-                    <div className="inner-row-3"></div>
-                </div>
-                <div className="row row-5">
-                    <div className="inner-row-1"></div>
-                    <div className="inner-row-2"></div>
-                    <div className="inner-row-3"></div>
-                </div> */}
             </div>
         );
     }
 }
- 
+
 export default LoadingScreen;

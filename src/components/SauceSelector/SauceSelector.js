@@ -9,7 +9,7 @@ class SauceSelector extends Component {
         this.props.updatePrice();
     }
 
-    render() { 
+    render() {
         let sauceList = ingredientsData.sauce.map((sauce, index) => {
             return (
                 <div key={sauce.type}>
@@ -22,8 +22,8 @@ class SauceSelector extends Component {
                         }}
                         checked={this.props.sauceType === sauce.type}
                     />
-                    <label 
-                        className={this.props.sauceType === sauce.type ? 'selected' : ''} 
+                    <label
+                        className={this.props.sauceType === sauce.type ? 'selected' : ''}
                         htmlFor={sauce.type}
                     >
                         {sauce.type}
@@ -32,18 +32,18 @@ class SauceSelector extends Component {
             )
         })
 
-        return (  
+        return (
             <div className='SauceSelector'>
                 <h4>Sauce:</h4>
                 <div className='SauceSelector-type'>{sauceList}</div>
-                <AmountSelect 
-                    name='sauce-amount' 
-                    currentAmount={this.props.sauceAmount} 
-                    amountSelect={this.props.sauceAmountSelect} 
+                <AmountSelect
+                    name='sauce-amount'
+                    currentAmount={this.props.sauceAmount}
+                    amountSelect={this.props.sauceAmountSelect}
                 />
             </div>
         );
     }
 }
- 
+
 export default SauceSelector;

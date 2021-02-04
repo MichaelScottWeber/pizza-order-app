@@ -12,7 +12,6 @@ function imagesLoaded(parentNode) {
 }
 
 class MenuItemList extends Component {
-
     state = {
         loading: true
     }
@@ -26,7 +25,7 @@ class MenuItemList extends Component {
     }
 
     renderLoadingScreen = () => {
-        if (!this.state.loading)  {
+        if (!this.state.loading) {
             return null;
         }
         return (
@@ -34,7 +33,7 @@ class MenuItemList extends Component {
         )
     }
 
-    render() { 
+    render() {
         const itemList = this.props.category.items.map(item => {
             return (
                 <li
@@ -55,12 +54,12 @@ class MenuItemList extends Component {
                 <h2>{this.props.category.category}</h2>
                 <p>{this.props.category.description}</p>
                 {this.renderLoadingScreen()}
-                <ul className={this.state.loading ? 'hide' : ''} ref={element => {this.listElement = element}}>
+                <ul className={this.state.loading ? 'hide' : ''} ref={element => { this.listElement = element }}>
                     {itemList}
                 </ul>
             </div>
         );
     }
 }
- 
+
 export default MenuItemList;

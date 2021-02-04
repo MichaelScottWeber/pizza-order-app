@@ -10,36 +10,23 @@ import Cart from '../Cart/Cart';
 import menuData from '../../menuData';
 import ingredientsData from '../../ingredientsData';
 
-import {ReactComponent as CartIcon} from '../../img/icons/icon-shopping-cart.svg'
-import {ReactComponent as BackIcon} from '../../img/icons/icon-cheveron-left.svg'
+import { ReactComponent as CartIcon } from '../../img/icons/icon-shopping-cart.svg'
+import { ReactComponent as BackIcon } from '../../img/icons/icon-cheveron-left.svg'
 
 class Body extends Component {
-    // static defaultProps = { 
-    //     menuData: menuData,
-    // }
 
-    state = {  
+    state = {
         menuData: [...menuData],
-        // windowWidth: window.innerWidth,
         view: 'MenuCategoryList',
-        // largeScreen: null,
         category: null,
         currentItem: null,
         cart: [],
         editing: { isEditing: false, itemIndex: null }
     }
 
-    // handleResize = () => {
-    //     if (window.innerWidth >= this.largeWindowSize) {
-    //         this.setState({ largeScreen: true });
-    //     } else {
-    //         this.setState({ largeScreen: false });
-    //     }
-    // }
-
     categorySelect = (cat) => {
         const category = Object.assign({}, cat);
-        this.setState({ 
+        this.setState({
             view: 'MenuItemList',
             category: category,
         });
@@ -53,7 +40,6 @@ class Body extends Component {
         }
         this.setState({
             view: 'MenuItemDetail',
-            // currentItem: {...item}
             currentItem: currentItem,
         })
     }
@@ -91,7 +77,7 @@ class Body extends Component {
     sauceTypeSelect = (e) => {
         const currentItem = this.state.currentItem;
         currentItem.sauceType = e;
-        this.setState({ currentItem: {...currentItem} });
+        this.setState({ currentItem: { ...currentItem } });
     }
 
     sauceAmountSelect = (e) => {
@@ -127,21 +113,6 @@ class Body extends Component {
             price: e.price
         });
         this.setState({ currentItem: currentItem });
-
-        // const currentItemToppings = this.state.currentItem.toppings;
-        // const newToppings = [...currentItemToppings].push({
-        //     name: e.type,
-        //     split: 'whole',
-        //     amount: 'normal',
-        //     price: e.price
-        // });
-        // this.setState(prevState => ({
-        //     ...prevState,
-        //     currentItem: {
-        //         ...prevState.currentItem,
-        //         toppings: newToppings
-        //     }
-        // }))
     }
 
     toppingRemove = (e) => {
@@ -167,7 +138,6 @@ class Body extends Component {
 
     recieveSpecialInstructions = (e) => {
         const currentItem = this.state.currentItem;
-        // currentItem.specialInstructions = e.target.value.toUpperCase();
         currentItem.specialInstructions = e.target.value;
         this.setState({ currentItem: currentItem });
     }
@@ -175,35 +145,27 @@ class Body extends Component {
     updatePrice = () => {
         const currentItem = this.state.currentItem;
         let newPrice;
-
         if (this.state.category.category === 'Pizzas') {
             const sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
-
             const crustIndex = ingredientsData.crust.findIndex(e => e.type === currentItem.crust);
             const crustPrice = ingredientsData.crust[crustIndex].price;
-
             const sauceIndex = ingredientsData.sauce.findIndex(e => e.type === currentItem.sauceType);
             const saucePrice = ingredientsData.sauce[sauceIndex].price;
-
             let toppingsPrice = 0;
             currentItem.toppings.forEach(topping => {
                 if (topping.price) {
                     toppingsPrice += topping.price;
                 }
             })
-
             newPrice = currentItem.availableSizes[sizeIndex].price + crustPrice + saucePrice + toppingsPrice;
         } else if (this.state.category.category === 'Salads') {
             const sizeIndex = currentItem.availableSizes.findIndex(e => e.size === currentItem.currentSize);
             newPrice = currentItem.availableSizes[sizeIndex].price
         } else {
             const itemIndex = this.state.category.items.findIndex(e => e.name === currentItem.name);
-
             newPrice = this.state.category.items[itemIndex].currentPrice;
         }
-
         currentItem.currentPrice = parseFloat((newPrice * currentItem.quantity).toFixed(2));
-
         this.setState({ currentItem: currentItem });
     }
 
@@ -222,13 +184,13 @@ class Body extends Component {
         menuData.forEach(cat => {
             cat.items.forEach(i => {
                 if (i.name === item.name) {
-                    this.setState({ category: {...cat} })
+                    this.setState({ category: { ...cat } })
                 }
             })
         })
         this.setState({
             editing: { isEditing: true, itemIndex: index },
-            currentItem: {...item},
+            currentItem: { ...item },
             view: 'MenuItemDetail',
         })
     }
@@ -243,7 +205,7 @@ class Body extends Component {
     updateCartItem = (item, index) => {
         let cart = [...this.state.cart];
         cart.splice(index, 1, item);
-        this.setState({ 
+        this.setState({
             cart: cart,
             editing: { isEditing: false, itemIndex: null },
         });
@@ -266,112 +228,90 @@ class Body extends Component {
         )
     }
 
-    // largeWindowSize = 1125;
-
-    // componentDidMount() {
-    //     if (window.innerWidth >= this.largeWindowSize) {
-    //         this.setState({ largeScreen: true });
-    //     } else {
-    //         this.setState({ largeScreen: false });
-    //     }
-    //     window.addEventListener("resize", this.handleResize);
-    // }
-      
-    // componentWillUnmount() {
-    //     window.addEventListener("resize", this.handleResize);
-    // }
-    
-    render() { 
-        // ON MOBILE SCREENS
-        // if (!this.state.largeScreen && this.state.view === 'MenuCategoryList') {
+    render() {
         if (this.state.view === 'MenuCategoryList') {
             return (
                 <div className="Body">
                     <div className="MenuCategoryList-container">
-                        {this.state.editing.isEditing === false ? 
+                        {this.state.editing.isEditing === false ?
                             <div className="button-holder">
-                                <Button 
+                                <Button
                                     text={this.btnContent2(
-                                        // <img className="cart-icon" src={cartIcon} />,
                                         <CartIcon className="cart-icon" />,
                                         <span>{this.state.cart.length}</span>
-                                    )} 
-                                    buttonClick={() => this.changeView('Cart')} 
+                                    )}
+                                    buttonClick={() => this.changeView('Cart')}
                                     classNames="cart-btn"
                                 />
                             </div>
-                        : ''}
-                        <MenuCategoryList 
-                            menuData={[...menuData]} 
-                            categorySelect={this.categorySelect} 
+                            : ''}
+                        <MenuCategoryList
+                            menuData={[...menuData]}
+                            categorySelect={this.categorySelect}
                         />
                     </div>
                 </div>
             );
         }
-        // if (!this.state.largeScreen && this.state.view === 'MenuItemList') {
+
         if (this.state.view === 'MenuItemList') {
             return (
                 <div className="Body">
                     <div className="MenuItemList-container">
                         {this.state.editing.isEditing === false ?
                             <div className="button-holder">
-                                <Button 
+                                <Button
                                     text={this.btnContent2(
-                                        // <img className="cart-icon" src={cartIcon} />,
                                         <CartIcon className="cart-icon" />,
                                         <span>{this.state.cart.length}</span>
-                                    )} 
-                                    buttonClick={() => this.changeView('Cart')} 
+                                    )}
+                                    buttonClick={() => this.changeView('Cart')}
                                     classNames="cart-btn"
                                 />
-                                <Button 
+                                <Button
                                     text={this.btnContent2(
-                                        // <img className="back-icon" src={backIcon} />,
                                         <BackIcon className="back-icon" />
-                                    )} 
-                                    buttonClick={() => this.changeView('MenuCategoryList')} 
+                                    )}
+                                    buttonClick={() => this.changeView('MenuCategoryList')}
                                     classNames="back-btn"
                                 />
                             </div>
-                        : ''}
-                        <MenuItemList 
-                            category={this.state.category} 
-                            itemSelect={this.itemSelect} 
+                            : ''}
+                        <MenuItemList
+                            category={this.state.category}
+                            itemSelect={this.itemSelect}
                         />
                     </div>
                 </div>
             )
         }
-        // if (!this.state.largeScreen && this.state.view === 'MenuItemDetail') {
+
         if (this.state.view === 'MenuItemDetail') {
             return (
                 <div className="Body">
                     <div className="MenuItemDetail-container">
                         {this.state.editing.isEditing === false ?
                             <div className="button-holder">
-                                <Button 
+                                <Button
                                     text={this.btnContent2(
-                                        // <img className="cart-icon" src={cartIcon} />,
                                         <CartIcon className="cart-icon" />,
                                         <span>{this.state.cart.length}</span>
-                                    )} 
-                                    buttonClick={() => this.changeView('Cart')} 
+                                    )}
+                                    buttonClick={() => this.changeView('Cart')}
                                     classNames="cart-btn"
                                 />
-                                <Button 
+                                <Button
                                     text={this.btnContent2(
-                                        // <img className="back-icon" src={backIcon} />,
                                         <BackIcon className="back-icon" />
                                     )}
-                                    buttonClick={() => this.changeView('MenuItemList')} 
+                                    buttonClick={() => this.changeView('MenuItemList')}
                                     classNames="back-btn"
                                 />
                             </div>
-                        : ''}
-                        <MenuItemDetail 
+                            : ''}
+                        <MenuItemDetail
                             category={this.state.category}
-                            currentItem={this.state.currentItem} 
+                            currentItem={this.state.currentItem}
                             quantityIncrease={this.quantityIncrease}
                             quantityDecrease={this.quantityDecrease}
                             sizeSelect={this.sizeSelect}
@@ -398,7 +338,7 @@ class Body extends Component {
                 </div>
             )
         }
-        // if (!this.state.largeScreen && this.state.view === 'ItemAdded') {
+
         if (this.state.view === 'ItemAdded') {
             return (
                 <div className='Body'>
@@ -408,116 +348,26 @@ class Body extends Component {
                 </div>
             )
         }
-        // if (!this.state.largeScreen && this.state.view === 'Cart') {
+
         if (this.state.view === 'Cart') {
             return (
                 <div className='Body'>
                     <div className="Cart-container">
-                        <Button 
-                            text="Keep Shopping" 
-                            buttonClick={this.continueShopping} 
+                        <Button
+                            text="Keep Shopping"
+                            buttonClick={this.continueShopping}
                             classNames="keep-shopping-btn"
                         />
-                        <Cart 
-                            cart={this.state.cart} 
-                            removeFromCart={this.removeFromCart} 
+                        <Cart
+                            cart={this.state.cart}
+                            removeFromCart={this.removeFromCart}
                             editCartItem={this.editCartItem}
                         />
                     </div>
                 </div>
             )
         }
-
-        // ON LARGE SCREENS
-        // if (this.state.largeScreen) {
-        //     return (
-        //         <div className='large-screen-body'>
-        //             <div className="MenuCategoryList-container">
-        //                 <MenuCategoryList 
-        //                     menuData={[...menuData]} 
-        //                     categorySelect={this.categorySelect} 
-        //                 />
-        //             </div>
-        //             <div className='center-panel'>
-        //                 {this.state.view === 'MenuItemList' ?
-        //                     <div className="MenuItemList-container">
-        //                         <MenuItemList 
-        //                             category={this.state.category} 
-        //                             itemSelect={this.itemSelect} 
-        //                         />
-        //                     </div>
-        //                 : ''}
-        //                 {this.state.view === 'MenuItemDetail' ?
-        //                     <div className="MenuItemDetail-container">
-        //                         {this.state.editing.isEditing === false ?
-        //                             <div className="button-holder">
-        //                                 <Button 
-        //                                     text={this.btnContent2(
-        //                                         // <img className="back-icon" src={backIcon} />,
-        //                                         <BackIcon className="back-icon" />
-        //                                     )}
-        //                                     buttonClick={() => this.changeView('MenuItemList')} 
-        //                                     classNames="back-btn"
-        //                                 />
-        //                             </div>
-        //                         : ''}
-        //                         <MenuItemDetail 
-        //                             category={this.state.category}
-        //                             currentItem={this.state.currentItem} 
-        //                             quantityIncrease={this.quantityIncrease}
-        //                             quantityDecrease={this.quantityDecrease}
-        //                             sizeSelect={this.sizeSelect}
-        //                             crustSelect={this.crustSelect}
-        //                             sauceTypeSelect={this.sauceTypeSelect}
-        //                             sauceAmountSelect={this.sauceAmountSelect}
-        //                             includeCheeseSelect={this.includeCheeseSelect}
-        //                             cheeseSplitSelect={this.cheeseSplitSelect}
-        //                             cheeseAmountSelect={this.cheeseAmountSelect}
-        //                             toppingAdd={this.toppingAdd}
-        //                             toppingRemove={this.toppingRemove}
-        //                             toppingSplit={this.toppingSplit}
-        //                             toppingAmountSelect={this.toppingAmountSelect}
-        //                             recieveSpecialInstructions={this.recieveSpecialInstructions}
-        //                             updatePrice={this.updatePrice}
-        //                             ingredientsData={ingredientsData}
-        //                             addToCart={this.addToCart}
-        //                             changeView={this.changeView}
-        //                             editing={this.state.editing}
-        //                             cancelEdit={this.cancelEdit}
-        //                             updateCartItem={this.updateCartItem}
-        //                         />
-        //                     </div>
-        //                 : ''}
-        //                 {this.state.view === 'ItemAdded' ?
-        //                     <div className="ItemAdded-container">
-        //                         <ItemAdded 
-        //                             currentItem={this.state.currentItem} 
-        //                             changeView={this.changeView} 
-        //                             largeScreen={this.state.largeScreen}
-        //                         />
-        //                     </div>
-        //                 : ''}
-        //                 {this.state.view === 'MenuCategoryList' ? 
-        //                     <div className='empty-panel'>
-        //                         <p>Select a menu category from the left</p>
-        //                     </div>
-        //                 : this.state.view === 'Cart' ? 
-        //                 <div className='empty-panel'>
-        //                     <p>Select a menu category from the left</p>
-        //                 </div>
-        //                 : ''}
-        //             </div>
-        //             <div className="Cart-container">
-        //                 <Cart 
-        //                     cart={this.state.cart} 
-        //                     removeFromCart={this.removeFromCart} 
-        //                     editCartItem={this.editCartItem}
-        //                 />
-        //             </div>
-        //         </div>
-        //     )
-        // }
     }
 }
- 
+
 export default Body;

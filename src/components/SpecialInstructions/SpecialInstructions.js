@@ -6,12 +6,11 @@ class SpecialInstructions extends Component {
         this.props.recieveSpecialInstructions(e)
     }
 
-    render() { 
-        return (  
-            // <div className='SpecialInstructions'>
+    render() {
+        return (
             <div className={this.props.currentItem.crust ? 'SpecialInstructions has-ingredients' : 'SpecialInstructions'}>
                 <label><h4>Special Instructions</h4></label>
-                <textarea 
+                <textarea
                     placeholder='Please list any dietary restrictions here'
                     value={this.props.currentItem.specialInstructions}
                     onChange={this.handleChange}
@@ -20,5 +19,5 @@ class SpecialInstructions extends Component {
         );
     }
 }
- 
+
 export default SpecialInstructions;

@@ -1,23 +1,20 @@
 import React, { Component } from 'react';
-import {ReactComponent as AddIcon} from '../../img/icons/icon-add.svg'
-import {ReactComponent as RemoveIcon} from '../../img/icons/icon-remove.svg'
+import { ReactComponent as AddIcon } from '../../img/icons/icon-add.svg'
+import { ReactComponent as RemoveIcon } from '../../img/icons/icon-remove.svg'
 
 class QuantitySelector extends Component {
     handlePlusClick = () => {
         this.props.quantityIncrease();
-        // this.props.updatePrice();
     }
 
     handleMinusClick = () => {
         this.props.quantityDecrease();
-        // this.props.updatePrice();
-        // console.log('minused!')
     }
 
-    render() { 
-        return (  
+    render() {
+        return (
             <div className='QuantitySelector'>
-                <h4>Quantity:</h4> 
+                <h4>Quantity:</h4>
                 <div className="control-container">
                     <button className="icon-container">
                         <AddIcon className="add-icon" onClick={this.handlePlusClick} />
@@ -33,5 +30,5 @@ class QuantitySelector extends Component {
         );
     }
 }
- 
+
 export default QuantitySelector;

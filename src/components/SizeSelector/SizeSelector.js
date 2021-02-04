@@ -15,7 +15,7 @@ class SizeSelector extends Component {
         this.props.updatePrice();
     }
 
-    sizeIcon =(size) => {
+    sizeIcon = (size) => {
         if (size === 'extra-large') {
             if (size === this.props.size) {
                 return <ExtraLargeSelected />
@@ -23,6 +23,7 @@ class SizeSelector extends Component {
                 return <ExtraLarge />
             }
         }
+
         if (size === 'large') {
             if (size === this.props.size) {
                 return <LargeSelected />
@@ -30,6 +31,7 @@ class SizeSelector extends Component {
                 return <Large />
             }
         }
+
         if (size === 'medium') {
             if (size === this.props.size) {
                 return <MediumSelected />
@@ -37,6 +39,7 @@ class SizeSelector extends Component {
                 return <Medium />
             }
         }
+        
         if (size === 'small') {
             if (size === this.props.size) {
                 return <SmallSelected />
@@ -46,11 +49,11 @@ class SizeSelector extends Component {
         }
     }
 
-    render() { 
+    render() {
         let sizeList = this.props.availableSizes.map((size, index) => {
             return (
-                <div 
-                    className="size-container" 
+                <div
+                    className="size-container"
                     key={size.size}
                     onClick={() => {
                         this.handleClick(size.size)
@@ -66,7 +69,7 @@ class SizeSelector extends Component {
             )
         })
 
-        return (  
+        return (
             <div className='SizeSelector'>
                 <h4>Size:</h4>
                 <div className="control-container">
@@ -76,5 +79,5 @@ class SizeSelector extends Component {
         );
     }
 }
- 
+
 export default SizeSelector;

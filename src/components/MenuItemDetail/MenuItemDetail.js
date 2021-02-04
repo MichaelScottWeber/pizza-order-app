@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import Button from '../Button/Button';
 import QuantitySelector from '../QuantitySelector/QuantitySelector';
 import SizeSelector from '../SizeSelector/SizeSelector';
@@ -11,7 +10,6 @@ import ToppingsList from '../ToppingsList/ToppingsList';
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
 
 class MenuItemDetail extends Component {
-
     state = {
         loading: true,
     }
@@ -35,7 +33,7 @@ class MenuItemDetail extends Component {
     }
 
     renderLoadingScreen = () => {
-        if (!this.state.loading)  {
+        if (!this.state.loading) {
             return null;
         }
         return (
@@ -43,22 +41,21 @@ class MenuItemDetail extends Component {
         )
     }
 
-    render() { 
-
-        const { 
-            currentItem, 
-            quantityIncrease, 
-            quantityDecrease, 
-            sizeSelect, 
-            crustSelect, 
-            sauceTypeSelect, 
-            sauceAmountSelect, 
-            optionSelect, 
-            includeCheeseSelect, 
-            cheeseSplitSelect, 
-            cheeseAmountSelect, 
-            toppingAdd, 
-            toppingRemove, 
+    render() {
+        const {
+            currentItem,
+            quantityIncrease,
+            quantityDecrease,
+            sizeSelect,
+            crustSelect,
+            sauceTypeSelect,
+            sauceAmountSelect,
+            optionSelect,
+            includeCheeseSelect,
+            cheeseSplitSelect,
+            cheeseAmountSelect,
+            toppingAdd,
+            toppingRemove,
             toppingSplit,
             toppingAmountSelect,
             recieveSpecialInstructions,
@@ -67,7 +64,7 @@ class MenuItemDetail extends Component {
             editing,
         } = this.props;
 
-        return (  
+        return (
             <div className="MenuItemDetail">
                 {this.renderLoadingScreen()}
                 <div className={this.state.loading ? 'hide' : ''}>
@@ -76,8 +73,7 @@ class MenuItemDetail extends Component {
                         <h3>{currentItem.name}</h3>
                         <p>{currentItem.description}</p>
                         <div className="underline" ></div>
-
-                        <QuantitySelector 
+                        <QuantitySelector
                             quantity={currentItem.quantity}
                             quantityIncrease={quantityIncrease}
                             quantityDecrease={quantityDecrease}
@@ -85,7 +81,7 @@ class MenuItemDetail extends Component {
                         />
                         <div className="underline" ></div>
 
-                        {currentItem.availableSizes 
+                        {currentItem.availableSizes
                             ? <div>
                                 <SizeSelector availableSizes={currentItem.availableSizes} size={currentItem.currentSize} sizeSelect={sizeSelect} optionSelect={optionSelect} updatePrice={updatePrice} />
                                 <div className="underline" ></div>
@@ -93,7 +89,7 @@ class MenuItemDetail extends Component {
                             : ''
                         }
 
-                        {currentItem.crust 
+                        {currentItem.crust
                             ? <div>
                                 <CrustSelector crust={currentItem.crust} crustSelect={crustSelect} updatePrice={updatePrice} />
                                 <div className="underline" ></div>
@@ -101,30 +97,30 @@ class MenuItemDetail extends Component {
                             : ''
                         }
 
-                        {currentItem.sauceType 
+                        {currentItem.sauceType
                             ? <div>
-                                <SauceSelector 
-                                    sauceAmount={currentItem.sauceAmount} 
-                                    sauceType={currentItem.sauceType} 
-                                    sauceTypeSelect={sauceTypeSelect} 
-                                    sauceAmountSelect={sauceAmountSelect} 
-                                    updatePrice={updatePrice} 
-                                /> 
+                                <SauceSelector
+                                    sauceAmount={currentItem.sauceAmount}
+                                    sauceType={currentItem.sauceType}
+                                    sauceTypeSelect={sauceTypeSelect}
+                                    sauceAmountSelect={sauceAmountSelect}
+                                    updatePrice={updatePrice}
+                                />
                                 <div className="underline" ></div>
                             </div>
                             : ''
                         }
 
-                        {currentItem.cheeseAmount 
+                        {currentItem.cheeseAmount
                             ? <div>
-                                <CheeseSelector 
-                                    includeCheese={currentItem.includeCheese} 
-                                    cheeseAmount={currentItem.cheeseAmount} 
-                                    cheeseSplit={currentItem.cheeseSplit} 
-                                    includeCheeseSelect={includeCheeseSelect} 
-                                    cheeseSplitSelect={cheeseSplitSelect} 
-                                    cheeseAmountSelect={cheeseAmountSelect} 
-                                /> 
+                                <CheeseSelector
+                                    includeCheese={currentItem.includeCheese}
+                                    cheeseAmount={currentItem.cheeseAmount}
+                                    cheeseSplit={currentItem.cheeseSplit}
+                                    includeCheeseSelect={includeCheeseSelect}
+                                    cheeseSplitSelect={cheeseSplitSelect}
+                                    cheeseAmountSelect={cheeseAmountSelect}
+                                />
                                 <div className="underline" ></div>
                             </div>
                             : ''
@@ -132,17 +128,17 @@ class MenuItemDetail extends Component {
 
                         <SpecialInstructions currentItem={currentItem} recieveSpecialInstructions={recieveSpecialInstructions} />
 
-                        {currentItem.toppings 
+                        {currentItem.toppings
                             ? <div>
                                 <div className="underline" ></div>
                                 <ToppingsList currentItem={currentItem} ingredientsData={ingredientsData} toppingAdd={toppingAdd} toppingRemove={toppingRemove} toppingSplit={toppingSplit} toppingAmountSelect={toppingAmountSelect} updatePrice={updatePrice} />
-                            </div> 
+                            </div>
                             : ''}
 
                         <div className='MenuItemDetail-add-to-order'>
                             <Button
                                 buttonClick={this.handleUpdateOrderClick}
-                                text={editing.isEditing ? `Update item - $${currentItem.currentPrice}` : `Add to order - $${currentItem.currentPrice}`} 
+                                text={editing.isEditing ? `Update item - $${currentItem.currentPrice}` : `Add to order - $${currentItem.currentPrice}`}
                             />
                             {editing.isEditing ? <Button classNames='cancel-btn' buttonClick={this.handleCancelClick} text='X' /> : ''}
                         </div>
@@ -152,5 +148,5 @@ class MenuItemDetail extends Component {
         );
     }
 }
- 
+
 export default MenuItemDetail;

@@ -8,24 +8,23 @@ class CheeseSelector extends Component {
 
     handleIncludeToggle = e => this.props.includeCheeseSelect(e);
 
-    render() { 
-
+    render() {
         const { includeCheese, cheeseAmount, cheeseSplit } = this.props;
 
         if (includeCheese) {
-            return (  
+            return (
                 <div className='CheeseSelector'>
                     <div className='top-container'>
                         <h4>Cheese</h4>
-                        <SplitSelect 
-                            path={cheeseSplit} 
-                            splitSelect={this.props.cheeseSplitSelect} 
+                        <SplitSelect
+                            path={cheeseSplit}
+                            splitSelect={this.props.cheeseSplitSelect}
                         />
                     </div>
                     <div className='cheese-input'>
-                        <input 
-                            type='checkbox' 
-                            id='cheese' 
+                        <input
+                            type='checkbox'
+                            id='cheese'
                             checked={includeCheese}
                             onChange={this.handleIncludeToggle}
                         />
@@ -34,23 +33,23 @@ class CheeseSelector extends Component {
                             <span>Include Cheese?</span>
                         </label>
                     </div>
-                    <AmountSelect 
-                        name='cheese-amount' 
-                        currentAmount={cheeseAmount} 
-                        amountSelect={this.props.cheeseAmountSelect} 
+                    <AmountSelect
+                        name='cheese-amount'
+                        currentAmount={cheeseAmount}
+                        amountSelect={this.props.cheeseAmountSelect}
                     />
                 </div>
             );
         } else {
-            return (  
+            return (
                 <div className='CheeseSelector'>
                     <div className='top-container'>
                         <h4>Cheese</h4>
                     </div>
                     <div className='cheese-input'>
-                        <input 
-                            type='checkbox' 
-                            id='cheese' 
+                        <input
+                            type='checkbox'
+                            id='cheese'
                             checked={includeCheese}
                             onChange={this.handleIncludeToggle}
                         />
@@ -62,9 +61,7 @@ class CheeseSelector extends Component {
                 </div>
             );
         }
-
-        
     }
 }
- 
+
 export default CheeseSelector;

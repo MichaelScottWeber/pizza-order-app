@@ -7,9 +7,7 @@ import { ReactComponent as Unchecked } from '../../img/icons/icon-unchecked.svg'
 
 class ToppingsList extends Component {
 
-    // handleIncludeOff = e => this.props.toppingAdd(e);
-    
-    render() { 
+    render() {
         const allToppings = this.props.ingredientsData.toppings.map((topping, index) => {
             const includedTopping = this.props.currentItem.toppings.find(e => e.name === topping.type)
 
@@ -33,16 +31,16 @@ class ToppingsList extends Component {
                                 <h5>{includedTopping.name}</h5>
                                 <Checked />
                             </label>
-                            <SplitSelect 
-                                index={index} 
-                                splitSelect={this.props.toppingSplit} 
+                            <SplitSelect
+                                index={index}
+                                splitSelect={this.props.toppingSplit}
                                 path={this.props.currentItem.toppings[index].split}
                             />
                         </div>
-                        <AmountSelect 
-                            name={includedTopping.name} 
-                            currentAmount={includedTopping.amount} 
-                            amountSelect={this.props.toppingAmountSelect} 
+                        <AmountSelect
+                            name={includedTopping.name}
+                            currentAmount={includedTopping.amount}
+                            amountSelect={this.props.toppingAmountSelect}
                             index={index}
                         />
                         <div className='divider'></div>
@@ -72,7 +70,7 @@ class ToppingsList extends Component {
             }
         })
 
-        return (  
+        return (
             <div className='ToppingsList'>
                 <h4>Toppings</h4>
                 {allToppings}
@@ -80,5 +78,5 @@ class ToppingsList extends Component {
         );
     }
 }
- 
+
 export default ToppingsList;

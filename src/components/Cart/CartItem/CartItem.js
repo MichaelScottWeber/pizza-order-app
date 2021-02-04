@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Button from '../../Button/Button';
-
-import {ReactComponent as RemoveIcon} from '../../../img/icons/icon-remove.svg'
-import {ReactComponent as DetailsIcon} from '../../../img/icons/icon-cheveron-right.svg'
+import { ReactComponent as RemoveIcon } from '../../../img/icons/icon-remove.svg'
+import { ReactComponent as DetailsIcon } from '../../../img/icons/icon-cheveron-right.svg'
 
 class CartItem extends Component {
     state = { displayDetails: false }
-    
+
     handleRemoveClick = (index) => {
         this.props.removeFromCart(index);
     }
@@ -17,11 +16,11 @@ class CartItem extends Component {
 
     handleDetailsClick = () => {
         this.setState(prevState => ({ displayDetails: !prevState.displayDetails }));
-    } 
-    render() { 
+    }
+
+    render() {
         const { item } = this.props;
 
-        // const size = () => item.currentSize ? <li>{`Size: ${item.currentSize}`}</li> : '';
         const size = () => {
             if (item.currentSize) {
                 return (
@@ -33,7 +32,6 @@ class CartItem extends Component {
             }
         };
 
-        // const crust = () => item.ingredients && item.ingredients.crust ? <li>{`Crust: ${item.ingredients.crust}`}</li> : '';
         const crust = () => {
             if (item.crust) {
                 return (
@@ -71,6 +69,7 @@ class CartItem extends Component {
                         </li>
                     )
                 }
+
                 if (item.cheeseAmount !== 'normal' || item.cheeseSplit !== 'whole') {
                     return (
                         <li>
@@ -85,7 +84,6 @@ class CartItem extends Component {
             }
         }
 
-        // const specialInstructions = () => item.specialInstructions ? <li>{`Instructions: ${item.specialInstructions}`}</li> : '';
         const specialInstructions = () => {
             if (item.specialInstructions) {
                 return (
@@ -117,13 +115,13 @@ class CartItem extends Component {
             }
         }
 
-        return (  
+        return (
             <div className="CartItem">
                 <div className="info-container">
-                    <img 
-                        src={this.props.item.imageUrl} 
+                    <img
+                        src={this.props.item.imageUrl}
                         alt={this.props.item.name}
-                        onLoad={this.props.imageLoad} 
+                        onLoad={this.props.imageLoad}
                     />
                     <div>
                         <h3>{this.props.item.name}</h3>
@@ -143,18 +141,18 @@ class CartItem extends Component {
                             {toppings()}
                         </ul>
                     </div>
-                    <Button 
-                        text="Edit" 
-                        buttonClick={() => this.handleEditClick(this.props.item, this.props.index)} 
+                    <Button
+                        text="Edit"
+                        buttonClick={() => this.handleEditClick(this.props.item, this.props.index)}
                         classNames='edit-btn'
                     />
                 </div>
                 <div className="remove-container">
-                    <Button 
+                    <Button
                         text={
                             <div><RemoveIcon className="remove-icon" /> <span>Remove</span></div>
-                        } 
-                        buttonClick={() => this.handleRemoveClick(this.props.index)} 
+                        }
+                        buttonClick={() => this.handleRemoveClick(this.props.index)}
                         classNames='remove-btn'
                     />
                     <p>${this.props.item.currentPrice}</p>
@@ -164,5 +162,5 @@ class CartItem extends Component {
         );
     }
 }
- 
+
 export default CartItem;
