@@ -46,37 +46,81 @@ Users should be able to:
 - SASS (SCSS)
 - [React](https://reactjs.org/) - JS library
 
-<!-- ### What I learned
+### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+#### Showing a loading screen while images are loading
 
-To see how you can add code snippets, see below:
+In every component that displays images I had to...
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
+Write a function that would scan a parent element for images and return whether or not they have been completed
 ```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+function imagesLoaded(parentNode) {
+    const imgElements = parentNode.querySelectorAll("img");
+    for (const img of imgElements) {
+        if (!img.complete) {
+            return false;
+        }
+    }
+    return true;
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+Write a handler function that would set state to loading: false if the images have not loaded
+```js
+handleStateChange = () => {
+    this.setState({
+        loading: !imagesLoaded(this.listElement),
+    })
+}
+```
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+Set a ref value on the image parent so it can be referenced by imagesLoaded, call handleStateChange on onLoad for each image, and conditionally render the loader and the image parent
+```js
+renderLoadingScreen = () => {
+    if (!this.state.loading) {
+        return null;
+    }
+    return (
+        <LoadingScreen />
+    )
+}
 
+render() {
+    const itemList = this.props.category.items.map(item => {
+        return (
+            <li
+                className=""
+                key={item.id}
+                onClick={() => (
+                    this.handleClick(item)
+                )}
+            >
+                <img src={item.imageUrl} alt={item.name} onLoad={this.handleStateChange} />
+                <h3>{item.name}</h3>
+            </li>
+        )
+    });
+
+    return (
+        <div className="MenuItemList">
+            <h2>{this.props.category.category}</h2>
+            <p>{this.props.category.description}</p>
+            {this.renderLoadingScreen()}
+            <ul className={this.state.loading ? 'hide' : ''} ref={element => { this.listElement = element }}>
+                {itemList}
+            </ul>
+        </div>
+    );
+}
+```
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+Future plans for improving this app include
+- Moving ingredientsData, menuData, and all images off of the app frontend
+- Adding user login, for viewing past orders and saving favorites
+- Refactoring with Redux for better state management
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
-
-### Useful resources
+<!-- ### Useful resources
 
 - [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
 - [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
