@@ -115,7 +115,7 @@ render() {
 ```
 ### Continued development
 
-Future plans for improving this app include
+Ways to improve this app include
 - Moving ingredientsData, menuData, and all images off of the app frontend
 - Adding user login, for viewing past orders and saving favorites
 - Refactoring with Redux for better state management
